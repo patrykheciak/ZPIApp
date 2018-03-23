@@ -7,4 +7,21 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="drug_array">
+        <item>ACC Optima</item>
+
+        <item>Dentosept A Mini spray</item>
+
+        <item>Gripex Intensive</item>
+
+        <item>Ketonal active</item>
+
+        <item>Maxon active</item>
+        <item>Meloxicam</item>
+
+        <item>Nefrostone</item>
+        <item>Nervomix control</item>
+        <item>Urofuraginum</item>
+    </string-array>
 </resources>
