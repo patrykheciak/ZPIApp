@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.zpi.zpiapp.InteractionsFragment"
+             tools:context="com.zpi.zpiapp.interactions.InteractionsFragment"
     android:background="#f00">
 
     <!-- TODO: Update blank fragment layout -->
