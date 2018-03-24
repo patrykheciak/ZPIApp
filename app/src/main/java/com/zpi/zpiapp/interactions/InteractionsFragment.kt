@@ -1,67 +1,98 @@
 package com.zpi.zpiapp.interactions
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zpi.zpiapp.R
-import android.widget.AutoCompleteTextView
+import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import com.zpi.zpiapp.model.Compound
+import com.zpi.zpiapp.R
+import com.zpi.zpiapp.model.Drug
 import com.zpi.zpiapp.model.Interaction
 import kotlinx.android.synthetic.main.fragment_interactions.*
 
-
 class InteractionsFragment : Fragment(), InteractionsContract.View {
 
-    override fun setPresenter(presenter: InteractionsContract.Presenter) {
-        TODO("not implemented") //To change body of created functions use File | Settings | // File Templates.
+    lateinit var mPresenter: InteractionsContract.Presenter
+    lateinit var mDrugs: Array<Drug>
+
+    override fun hideInteractionSection() {
+        interactionsFound.visibility = View.GONE
+        interactionsNotFound.visibility = View.GONE
     }
+
+    override fun showNoInteractions() {
+        interactionsFound.visibility = View.GONE
+        interactionsNotFound.visibility = View.VISIBLE
+    }
+
+    override fun showInteractions(interactions: List<Interaction>) {
+        interactionsNotFound.visibility = View.GONE
+        interactionsFound.visibility = View.VISIBLE
+
+        (recyclerInteractions.adapter as InteractionsAdapter).updateInteractions(interactions)
+        interactionsFoundText.text = getString(R.string.found_n_interactions, interactions.size)
+    }
+
+    override fun showNoSuchDrug(drugNumber: Int) {
+        val shake = AnimationUtils.loadAnimation(context, R.anim.shake)
+
+        when (drugNumber) {
+            1 -> drug1.startAnimation(shake)
+            2 -> drug2.startAnimation(shake)
+        }
+    }
+
+    override fun setPresenter(presenter: InteractionsContract.Presenter) {
+        mPresenter = presenter
+    }
+
+    override fun setDrugs(drugs: Array<Drug>) {
+        mDrugs = drugs
+        val drugStrings = mDrugs.map { it.name }
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, drugStrings)
+        drug1.setAdapter(adapter)
+        drug2.setAdapter(adapter)
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        val view = inflater!!.inflate(R.layout.fragment_interactions, container, false)
-
-        val drugs = resources.getStringArray(R.array.drug_array)
-
-
-        val actv = view.findViewById<AutoCompleteTextView>(R.id.comp1)
-        val adapter = ArrayAdapter<String>(context,
-                android.R.layout.simple_dropdown_item_1line, drugs)
-        actv.setAdapter(adapter)
-
-
-
-
-        return view
+        return inflater!!.inflate(R.layout.fragment_interactions, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
-        val c0 = Compound(0, "Paracetamol")
-        val c1 = Compound(1, "Chlorowodorek pseudoefedryny")
-        val c2 = Compound(2, "Bromowodorek dekstrometorfanu")
-        val c3 = Compound(3, "Acyklowir")
-        val c4 = Compound(4, "Agomelatyna")
-        val c5 = Compound(5, "Akamprozat")
-        val c6 = Compound(6, "Alprazolam")
-        val c7 = Compound(7, "Papaweryna")
+        recyclerInteractions.adapter = InteractionsAdapter(Mock.interactions())
+        recyclerInteractions.layoutManager = LinearLayoutManager(context)
 
-        val i0 = Interaction(0, 0, 1, "Polaczenie paracetamolu z chlorowodorkiem pseudoefedryny jest niebezpieczne dla twojego zdrowia xD", c0, c1)
-        val i1 = Interaction(1, 2, 3, "Moze wywolywac zawroty glowy", c2,c3)
-        val i2 = Interaction(2, 4,5, "Lorem ipsum", c4,c5)
-        val i3 = Interaction(3, 6,7,"Papaweryna to taka karyna wsrod skladnikow lekow. Trzymaj sie od niej z daleka", c6,c7)
+        floatingActionButton.setOnClickListener {
+            removeFocusFromControlPanel()
+            hideKeyboard()
+            mPresenter.interact(drug1.text.toString(), drug2.text.toString())
+        }
+    }
 
-        val interakcje = ArrayList<Interaction>()
-        interakcje.add(i0)
-        interakcje.add(i1)
-        interakcje.add(i2)
-        interakcje.add(i3)
-        recycler_interactions.adapter = InteractionsAdapter(interakcje)
-        recycler_interactions.layoutManager = LinearLayoutManager(context)
+    private fun removeFocusFromControlPanel() {
+        drug1.clearFocus()
+        drug2.clearFocus()
+    }
+
+    private fun hideKeyboard() {
+        val view = InteractionsFragment@ this.activity.currentFocus
+        if (view != null) {
+            val imm = InteractionsFragment@ this.activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mPresenter.start()
     }
 
 }// Required empty public constructor
