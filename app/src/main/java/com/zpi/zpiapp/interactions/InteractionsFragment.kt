@@ -2,6 +2,7 @@ package com.zpi.zpiapp.interactions
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -47,6 +48,10 @@ class InteractionsFragment : Fragment(), InteractionsContract.View {
         }
     }
 
+    override fun showError() {
+        Snackbar.make(interactionsRoot, R.string.connection_error, Snackbar.LENGTH_LONG).show()
+    }
+
     override fun setPresenter(presenter: InteractionsContract.Presenter) {
         mPresenter = presenter
     }
@@ -67,12 +72,13 @@ class InteractionsFragment : Fragment(), InteractionsContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
-        recyclerInteractions.adapter = InteractionsAdapter(Mock.interactions())
+        recyclerInteractions.adapter = InteractionsAdapter()
         recyclerInteractions.layoutManager = LinearLayoutManager(context)
 
         floatingActionButton.setOnClickListener {
             removeFocusFromControlPanel()
             hideKeyboard()
+            hideInteractionSection() // or/and make fancy loading animation
             mPresenter.interact(drug1.text.toString(), drug2.text.toString())
         }
     }

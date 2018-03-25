@@ -9,7 +9,7 @@ import com.zpi.zpiapp.model.Interaction
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.interactions_row.*
 
-class InteractionsAdapter(var items: List<Interaction>) : RecyclerView.Adapter<InteractionsAdapter.InteractionVH>() {
+class InteractionsAdapter(var items: List<Interaction> = emptyList()) : RecyclerView.Adapter<InteractionsAdapter.InteractionVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InteractionVH {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.interactions_row, parent, false)
@@ -31,9 +31,9 @@ class InteractionsAdapter(var items: List<Interaction>) : RecyclerView.Adapter<I
             RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(interaction: Interaction) {
-            compound1.text = interaction.idCompoundNavigation.internationalName
-            compound2.text = interaction.comIdCompoundNavigation.internationalName
-            description.text = interaction.interactionInfo
+            compound1.text = interaction.firstCompound
+            compound2.text = interaction.secondCompound
+            description.text = interaction.interactionDesctiption
         }
     }
 }

@@ -22,4 +22,5 @@
     </string-array>
 
     <string name="found_n_interactions">Znaleziono interakcje: %1$d</string>
+    <string name="connection_error">Nie udało się połączyć z serwerem</string>
 </resources>

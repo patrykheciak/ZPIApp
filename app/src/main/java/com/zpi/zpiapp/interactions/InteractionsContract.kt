@@ -13,6 +13,7 @@ interface InteractionsContract {
         fun setDrugs(drugs: Array<Drug>)
         fun showNoSuchDrug(drugNumber: Int)
         fun hideInteractionSection()
+        fun showError()
     }
 
     interface Presenter : BasePresenter {
