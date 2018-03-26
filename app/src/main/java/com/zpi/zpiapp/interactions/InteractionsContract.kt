@@ -10,7 +10,7 @@ interface InteractionsContract {
     interface View : BaseView<Presenter> {
         fun showNoInteractions()
         fun showInteractions(interactions: List<Interaction>)
-        fun setDrugs(drugs: Array<Drug>)
+        fun setDrugs(drugs: List<Drug>)
         fun showNoSuchDrug(drugNumber: Int)
         fun hideInteractionSection()
         fun showError()

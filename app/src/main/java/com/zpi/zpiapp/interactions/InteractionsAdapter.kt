@@ -31,8 +31,8 @@ class InteractionsAdapter(var items: List<Interaction> = emptyList()) : Recycler
             RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(interaction: Interaction) {
-            compound1.text = interaction.firstCompound
-            compound2.text = interaction.secondCompound
+            compound1.text = interaction.firstIngredient
+            compound2.text = interaction.secondIngredient
             description.text = interaction.interactionDesctiption
         }
     }

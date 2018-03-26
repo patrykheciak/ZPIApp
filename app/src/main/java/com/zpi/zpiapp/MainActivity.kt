@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-//        interactionsFragment = supportFragmentManager.findFragmentById(R.id.content) as InteractionsFragment?
+//        interactionsFragment = supportFragmentManager.findFragmentById(R.idDrug.content) as InteractionsFragment?
 //        if (interactionsFragment == null)
 //            interactionsFragment = InteractionsFragment()
 //        if (interactionsFragment != null)

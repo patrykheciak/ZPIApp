@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_interactions.*
 class InteractionsFragment : Fragment(), InteractionsContract.View {
 
     lateinit var mPresenter: InteractionsContract.Presenter
-    lateinit var mDrugs: Array<Drug>
+    lateinit var mDrugs: List<Drug>
 
     override fun hideInteractionSection() {
         interactionsFound.visibility = View.GONE
@@ -56,7 +56,7 @@ class InteractionsFragment : Fragment(), InteractionsContract.View {
         mPresenter = presenter
     }
 
-    override fun setDrugs(drugs: Array<Drug>) {
+    override fun setDrugs(drugs: List<Drug>) {
         mDrugs = drugs
         val drugStrings = mDrugs.map { it.name }
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, drugStrings)

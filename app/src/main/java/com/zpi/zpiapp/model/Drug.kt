@@ -1,8 +1,9 @@
 package com.zpi.zpiapp.model
 
 data class Drug(
-        var id : Int,
+        var idDrug : Int,
         var name: String,
         var volume: Int,
-        var dossageForm: String
+        var dosageForm: String,
+        var ingredientsList: List<DrugIngredient>
 )
