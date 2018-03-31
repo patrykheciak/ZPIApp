@@ -23,4 +23,6 @@
 
     <string name="found_n_interactions">Znaleziono interakcje: %1$d</string>
     <string name="connection_error">Nie udało się połączyć z serwerem</string>
+    <string name="newCareAssistantLoginEditTextHint">Login opiekuna</string>
+    <string name="careAssistantsNotFoundText">Dodaj nowego opiekuna</string>
 </resources>
