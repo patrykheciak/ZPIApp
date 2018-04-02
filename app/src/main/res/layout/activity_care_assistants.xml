@@ -7,5 +7,10 @@
         android:layout_height="match_parent"
         tools:context="com.zpi.zpiapp.careAssistants.CareAssistantsActivity">
 
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.zpi.zpiapp.careAssistants.CareAssistantsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
 

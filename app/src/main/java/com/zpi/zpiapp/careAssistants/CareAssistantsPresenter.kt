@@ -1,18 +1,24 @@
 package com.zpi.zpiapp.careAssistants
 
-import com.zpi.zpiapp.model.CareAssistant
 
 
-class CareAssistantsPresenter: CareAssistantsContract.Presenter {
+class CareAssistantsPresenter( private val careAssistantsView: CareAssistantsContract.View): CareAssistantsContract.Presenter {
+
+    private val careAssistantDAO:CareAssistantDAO = CareAssistatntMockDAO()
+
+    init {
+        careAssistantsView.setPresenter(this)
+    }
+
     override fun start() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        careAssistantsView.showCareAssistants(careAssistantDAO.getUserCareAssistants(0))
     }
 
-    override fun searchCareAssistant(login: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun addNewCareAssistant(login: String) {
+
     }
 
-    override fun addNewCareAssistant(careAssistant: CareAssistant) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun removeCareAssistant(index: Int) {
+
     }
 }
