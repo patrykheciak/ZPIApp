@@ -55,6 +55,8 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val presenter=CareAssistantsPresenter(this)
+
         return inflater!!.inflate(R.layout.fragment_care_assistants, container, false)
     }
 
@@ -62,6 +64,8 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
         super.onViewCreated(view, savedInstanceState)
         careAssistantsRecyclerView.adapter=CareAssistantsAdapter()
         careAssistantsRecyclerView.layoutManager=LinearLayoutManager(context)
+
+
 
         fabCareAssistants.setOnClickListener {
             hideKeyboard()

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.careAssistants.CareAssistantsAdapter
 import com.zpi.zpiapp.careAssistants.CareAssistantsFragment
 import com.zpi.zpiapp.careAssistants.CareAssistantsPresenter
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         item?.title="Test"
-        startActivity(Intent(this,CareAssistantsAdapter::class.java))
+        startActivity(Intent(this,CareAssistantsActivity::class.java))
         return true
     }
 }
