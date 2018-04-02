@@ -9,7 +9,7 @@ import com.zpi.zpiapp.model.CareAssistant
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.care_assistants_row.*
 
-class CareAssistantsAdapter(public var items: List<CareAssistant> = emptyList())
+class CareAssistantsAdapter(var items: List<CareAssistant> = emptyList())
     : RecyclerView.Adapter<CareAssistantsAdapter.CareAssistantVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CareAssistantVH {

@@ -1,9 +1,14 @@
 package com.zpi.zpiapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import com.zpi.zpiapp.careAssistants.CareAssistantsAdapter
 import com.zpi.zpiapp.careAssistants.CareAssistantsFragment
 import com.zpi.zpiapp.careAssistants.CareAssistantsPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
@@ -57,5 +62,17 @@ class MainActivity : AppCompatActivity() {
 //            interactionsFragment = InteractionsFragment()
 //        if (interactionsFragment != null)
 //            interactionsPresenter = InteractionsPresenter(interactionsFragment!!)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.test_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.title="Test"
+        startActivity(Intent(this,CareAssistantsAdapter::class.java))
+        return true
     }
 }

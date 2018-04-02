@@ -103,21 +103,22 @@
               android:id="@+id/careAssistantsConnectionProblem"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:visibility="gone">
 
               <ImageView
                   android:id="@+id/imageView5"
                   android:layout_width="match_parent"
                   android:layout_height="120dp"
 
-                  android:src="@drawable/ic_autorenew_black_24dp"
-                  android:contentDescription="@string/careAssistantsConnectionProblemText" />
+                  android:contentDescription="@string/careAssistantsConnectionProblemText"
+                  android:src="@drawable/ic_autorenew_black_24dp" />
 
               <TextView
                   android:id="@+id/textView"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/careAssistantsNotFoundText"
+                  android:text="@string/careAssistantsConnectionProblemText"
                   android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
           </LinearLayout>
 

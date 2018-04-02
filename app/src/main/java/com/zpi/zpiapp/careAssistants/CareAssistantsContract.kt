@@ -9,13 +9,14 @@ interface CareAssistantsContract {
         fun showCareAssistants(careAssistants:List<CareAssistant>)
         fun showCareAssistantsNotFound()
         fun showConnectionError()
-        fun showRESTMessageError( error:String )
+        fun showSnackBarError(error:String )
         fun clearAddCareAssistant()
     }
 
     interface Presenter : BasePresenter{
         fun addNewCareAssistant(login: String)
-        fun removeCareAssistant(index: Int)
+        fun removeCareAssistant(login: String)
+        fun refreshCareAssistants()
     }
 
 }
