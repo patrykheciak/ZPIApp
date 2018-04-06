@@ -1,3 +1,3 @@
 package com.zpi.zpiapp.model
 
-data class CareAssistant(val login:String, val firstName:String, val lastName:String )
+data class CareAssistant(var idCareAssistant:Int, var name:String, var surname:String )

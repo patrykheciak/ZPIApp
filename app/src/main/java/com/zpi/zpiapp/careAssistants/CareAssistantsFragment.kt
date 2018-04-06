@@ -1,7 +1,7 @@
 package com.zpi.zpiapp.careAssistants
 
+import android.app.AlertDialog
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -16,66 +16,69 @@ import com.zpi.zpiapp.model.CareAssistant
 import kotlinx.android.synthetic.main.care_assistants_row.*
 import kotlinx.android.synthetic.main.fragment_care_assistants.*
 
+
+
 class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
 
-    override fun showCareAssistants(careAssistants: List<CareAssistant>) {
-        careAssistantsFound.visibility=View.VISIBLE
-        careAssistantsNotFound.visibility=View.GONE
-        careAssistantsConnectionProblem.visibility=View.GONE
 
-        (careAssistantsRecyclerView.adapter as CareAssistantsAdapter).items = careAssistants
-        careAssistantsRecyclerView.adapter.notifyDataSetChanged()
+    private lateinit var mPresenter: CareAssistantsContract.Presenter
+
+    override fun setPresenter(presenter: CareAssistantsContract.Presenter) {
+        this.mPresenter = presenter
+    }
+
+    override fun showCareAssistants(careAssistants: List<CareAssistant>) {
+        care_assistants_found_frame.visibility=View.VISIBLE
+        care_assistants_not_found_frame.visibility=View.GONE
+        care_assistants_connection_problem_frame.visibility=View.GONE
+
+        (care_assistants_found_recycler_view.adapter as CareAssistantsAdapter).items = careAssistants
+        care_assistants_found_recycler_view.adapter.notifyDataSetChanged()
     }
 
     override fun showCareAssistantsNotFound() {
-        careAssistantsFound.visibility=View.GONE
-        careAssistantsNotFound.visibility=View.VISIBLE
-        careAssistantsConnectionProblem.visibility=View.GONE
+        care_assistants_found_frame.visibility=View.GONE
+        care_assistants_not_found_frame.visibility=View.VISIBLE
+        care_assistants_connection_problem_frame.visibility=View.GONE
     }
 
     override fun showConnectionError() {
-        careAssistantsFound.visibility=View.GONE
-        careAssistantsNotFound.visibility=View.GONE
-        careAssistantsConnectionProblem.visibility=View.VISIBLE
+        care_assistants_found_frame.visibility=View.GONE
+        care_assistants_not_found_frame.visibility=View.GONE
+        care_assistants_connection_problem_frame.visibility=View.VISIBLE
     }
 
     override fun showSnackBarError(error: String) {
-        Snackbar.make(careAssistantsRoot,error,Snackbar.LENGTH_LONG).show();
+        Snackbar.make(care_assistants_root,error,Snackbar.LENGTH_LONG).show();
     }
 
     override fun clearAddCareAssistant() {
-        careAssistantLoginTV.text=""
-    }
-
-    private lateinit var presenter: CareAssistantsContract.Presenter
-
-    override fun setPresenter(presenter: CareAssistantsContract.Presenter) {
-        this.presenter = presenter
+        care_assistant_row_surname.text=""
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val presenter=CareAssistantsPresenter(this)
-
         return inflater!!.inflate(R.layout.fragment_care_assistants, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        careAssistantsRecyclerView.adapter=CareAssistantsAdapter()
-        careAssistantsRecyclerView.layoutManager=LinearLayoutManager(context)
+        care_assistants_found_recycler_view.adapter=CareAssistantsAdapter(object :CareAssistantsAdapter.ClickListener{
+            override fun onRemoveButtonClicked(careAssistantId: Int) {
+                mPresenter.checkRemovingCareAssistatn(careAssistantId)
+            }
+        })
+        care_assistants_found_recycler_view.layoutManager=LinearLayoutManager(context)
 
-
-
-        fabCareAssistants.setOnClickListener {
+        care_assistants_add_panel_fab.setOnClickListener {
             hideKeyboard()
-            presenter.addNewCareAssistant(careAssistantLoginTV.text as String)
+            mPresenter.addNewCareAssistant(care_assistants_add_panel_login.text.toString() )
         }
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.start()
+        mPresenter.start()
     }
 
     private fun hideKeyboard() {
@@ -84,6 +87,20 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
             val imm = InteractionsFragment@ this.activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+
+    override fun showRemoveDialog(careAssistant: CareAssistant) {
+        val builder = AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert)
+
+        builder.setTitle("Usuwanie")
+                .setMessage("Czy na pewno chcesz usunąć ${careAssistant.name} ${careAssistant.surname}")
+                .setPositiveButton(android.R.string.yes, { _, _ ->
+                    mPresenter.removeCareAssistant(careAssistant.idCareAssistant)
+                })
+                .setNegativeButton(android.R.string.no, { _, _ ->
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
     }
 
 }

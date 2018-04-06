@@ -20,20 +20,20 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/careAssistantLoginTV"
+            android:id="@+id/care_assistant_row_surname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Login"
+            android:text="Surname"
             android:textAppearance="@android:style/TextAppearance.Material.Title"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/care_assostant_row_remove_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/careAssistantNameTV"
+            android:id="@+id/care_assistant_row_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -45,12 +45,12 @@
             android:textAllCaps="false"
             android:textAppearance="@android:style/TextAppearance.Material.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/care_assostant_row_remove_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/careAssistantLoginTV" />
+            app:layout_constraintTop_toBottomOf="@+id/care_assistant_row_surname" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/care_assostant_row_remove_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"

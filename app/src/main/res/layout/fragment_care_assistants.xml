@@ -1,14 +1,19 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/careAssistantsRoot"
+    android:id="@+id/care_assistants_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zpi.zpiapp.careAssistants.CareAssistantsFragment">
 
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/addCareAssistantPanel"
+        android:id="@+id/care_assistants_add_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -19,17 +24,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@id/fabCareAssistants"
+            app:layout_constraintEnd_toStartOf="@id/care_assistants_add_panel_fab"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/newCareAssistantLogin"
+                android:id="@+id/care_assistants_add_panel_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/newCareAssistantLoginEditTextHint"
@@ -37,7 +44,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabCareAssistants"
+            android:id="@+id/care_assistants_add_panel_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -50,8 +57,8 @@
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
-      <FrameLayout
-        android:id="@+id/careAssistantsFrame"
+    <FrameLayout
+        android:id="@+id/care_assistants_frame"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -62,66 +69,66 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addCareAssistantPanel">
+        app:layout_constraintTop_toBottomOf="@id/care_assistants_add_panel">
 
-          <FrameLayout
-              android:id="@+id/careAssistantsFound"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:visibility="gone">
+        <FrameLayout
+            android:id="@+id/care_assistants_found_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-              <android.support.v7.widget.RecyclerView
-                  android:id="@+id/careAssistantsRecyclerView"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent" />
-          </FrameLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/care_assistants_found_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
-          <LinearLayout
-              android:id="@+id/careAssistantsNotFound"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/care_assistants_not_found_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-              <ImageView
-                  android:id="@+id/imageView4"
-                  android:layout_width="match_parent"
-                  android:layout_height="120dp"
-                  android:contentDescription="@string/careAssistantsNotFoundText"
-                  android:src="@drawable/ic_person_add_black_24dp" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:contentDescription="@string/careAssistantsNotFoundText"
+                android:src="@drawable/ic_person_add_black_24dp" />
 
-              <TextView
-                  android:id="@+id/textView2"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/careAssistantsNotFoundText"
-                  android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                  tools:text="@string/careAssistantsNotFoundText" />
-          </LinearLayout>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/careAssistantsNotFoundText"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                tools:text="@string/careAssistantsNotFoundText" />
+        </LinearLayout>
 
-          <LinearLayout
-              android:id="@+id/careAssistantsConnectionProblem"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/care_assistants_connection_problem_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-              <ImageView
-                  android:id="@+id/imageView5"
-                  android:layout_width="match_parent"
-                  android:layout_height="120dp"
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
 
-                  android:contentDescription="@string/careAssistantsConnectionProblemText"
-                  android:src="@drawable/ic_autorenew_black_24dp" />
+                android:contentDescription="@string/careAssistantsConnectionProblemText"
+                android:src="@drawable/ic_autorenew_black_24dp" />
 
-              <TextView
-                  android:id="@+id/textView"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/careAssistantsConnectionProblemText"
-                  android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-          </LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/careAssistantsConnectionProblemText"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        </LinearLayout>
 
-      </FrameLayout>
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

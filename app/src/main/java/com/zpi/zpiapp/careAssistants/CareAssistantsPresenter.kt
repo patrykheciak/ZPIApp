@@ -25,23 +25,32 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
     }
 
     override fun addNewCareAssistant(login: String) {
-        careAssistantDAO.userList.add(careAssistantDAO.allList[2])
-        refreshCareAssistants()
+        val added = careAssistantDAO.allList.firstOrNull{careAssistant -> careAssistant.name == login }
+        if(added != null){
+            careAssistantDAO.userList.add(added)
+            refreshCareAssistants()
+            careAssistantsView.clearAddCareAssistant()
+        } else careAssistantsView.showSnackBarError("nie znaleziono podaengo urzytkownika")
+
     }
 
-    override fun removeCareAssistant(login: String) {
-        careAssistantDAO.userList.removeAt(1)
+    override fun checkRemovingCareAssistatn(id: Int) {
+        val remove = careAssistantDAO.userList.first { careAssistant -> careAssistant.idCareAssistant==id }
+        careAssistantsView.showRemoveDialog( remove )
+    }
+
+    override fun removeCareAssistant(id: Int) {
+        val remove = careAssistantDAO.userList.first { careAssistant -> careAssistant.idCareAssistant==id }
+        careAssistantDAO.userList.remove(remove)
         refreshCareAssistants()
     }
 
     private class CareAssistantsMockDAO{
         val allList = mutableListOf(
-                CareAssistant("aaa","Tomek","Radca"),
-                CareAssistant("ddd","Milek","Mosona"),
-                CareAssistant("bbb","Olek","Katorga"))
+                CareAssistant(1,"Tomek","Radca"),
+                CareAssistant(2,"Milek","Mosona"),
+                CareAssistant(3,"Olek","Katorga"))
 
         val userList = mutableListOf(allList[1],allList[0])
-
-
     }
 }

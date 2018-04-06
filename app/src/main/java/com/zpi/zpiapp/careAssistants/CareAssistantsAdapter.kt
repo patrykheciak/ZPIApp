@@ -9,7 +9,8 @@ import com.zpi.zpiapp.model.CareAssistant
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.care_assistants_row.*
 
-class CareAssistantsAdapter(var items: List<CareAssistant> = emptyList())
+class CareAssistantsAdapter(val clickListener: ClickListener,
+                            var items: List<CareAssistant> = emptyList())
     : RecyclerView.Adapter<CareAssistantsAdapter.CareAssistantVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CareAssistantVH {
@@ -27,11 +28,20 @@ class CareAssistantsAdapter(var items: List<CareAssistant> = emptyList())
     }
 
 
-    class CareAssistantVH(override val containerView:View):RecyclerView.ViewHolder(containerView),LayoutContainer {
+
+    inner class CareAssistantVH(override val containerView:View):RecyclerView.ViewHolder(containerView),LayoutContainer {
         fun bind(careAssistant: CareAssistant){
-            careAssistantLoginTV.text=careAssistant.login
-            careAssistantNameTV.text=careAssistant.firstName+' '+careAssistant.lastName
+            care_assistant_row_surname.text=careAssistant.surname
+            care_assistant_row_name.text=careAssistant.name
+
+            care_assostant_row_remove_button.setOnClickListener({
+                clickListener.onRemoveButtonClicked(careAssistant.idCareAssistant)
+            })
         }
+    }
+
+    public interface ClickListener{
+        fun onRemoveButtonClicked( careAssistantId: Int )
     }
 
 }

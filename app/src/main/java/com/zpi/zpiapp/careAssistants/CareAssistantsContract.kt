@@ -11,11 +11,13 @@ interface CareAssistantsContract {
         fun showConnectionError()
         fun showSnackBarError(error:String )
         fun clearAddCareAssistant()
+        fun showRemoveDialog(careAssistant: CareAssistant)
     }
 
     interface Presenter : BasePresenter{
         fun addNewCareAssistant(login: String)
-        fun removeCareAssistant(login: String)
+        fun checkRemovingCareAssistatn(id : Int )
+        fun removeCareAssistant(id: Int)
         fun refreshCareAssistants()
     }
 
