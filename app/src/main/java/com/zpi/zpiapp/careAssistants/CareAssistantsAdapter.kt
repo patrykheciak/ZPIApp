@@ -28,7 +28,6 @@ class CareAssistantsAdapter(val clickListener: ClickListener,
     }
 
 
-
     inner class CareAssistantVH(override val containerView:View):RecyclerView.ViewHolder(containerView),LayoutContainer {
         fun bind(careAssistant: CareAssistant){
             care_assistant_row_surname.text=careAssistant.surname
