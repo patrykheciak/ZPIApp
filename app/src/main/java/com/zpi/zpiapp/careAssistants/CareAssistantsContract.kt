@@ -6,7 +6,9 @@ import com.zpi.zpiapp.model.CareAssistant
 
 interface CareAssistantsContract {
     interface View:BaseView<Presenter>{
-        fun showCareAssistants(careAssistants:List<CareAssistant>)
+        fun showCareAssistants()
+        fun addCareAssistant( careAssistant: CareAssistant )
+        fun removeCareAssistant( careAssistant: CareAssistant )
         fun showCareAssistantsNotFound()
         fun showConnectionError()
         fun showSnackBarError(error:String )

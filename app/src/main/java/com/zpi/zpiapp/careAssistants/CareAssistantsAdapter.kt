@@ -10,7 +10,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.care_assistants_row.*
 
 class CareAssistantsAdapter(val clickListener: ClickListener,
-                            var items: List<CareAssistant> = emptyList())
+                            var items: MutableList<CareAssistant> = mutableListOf())
     : RecyclerView.Adapter<CareAssistantsAdapter.CareAssistantVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CareAssistantVH {
@@ -25,6 +25,35 @@ class CareAssistantsAdapter(val clickListener: ClickListener,
 
     override fun onBindViewHolder(holder: CareAssistantVH, position: Int) {
         holder.bind(items[position])
+    }
+
+    fun deleteItem( careAssistant: CareAssistant ){
+        items.indexOf(careAssistant).let {
+            items.removeAt(it)
+            notifyItemRemoved(it)
+        }
+    }
+
+    fun addItemToBeginning( careAssistant:CareAssistant ){
+        items.add(0,careAssistant)
+        notifyItemInserted(0)
+    }
+
+    fun addItemToEnd(careAssistant: CareAssistant ){
+        items.add(careAssistant)
+        notifyItemInserted(items.size)
+    }
+
+    fun replaceItems( careAssistantCollection: Collection<CareAssistant> ){
+        removeCollection()
+        careAssistantCollection.forEach { addItemToEnd(it) }
+    }
+
+    fun removeCollection(){
+        while (items.isEmpty().not()){
+            items.removeAt(0)
+            notifyItemRemoved(0)
+        }
     }
 
 

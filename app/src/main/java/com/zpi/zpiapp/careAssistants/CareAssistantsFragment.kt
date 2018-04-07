@@ -19,21 +19,17 @@ import kotlinx.android.synthetic.main.fragment_care_assistants.*
 
 
 class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
-
-
     private lateinit var mPresenter: CareAssistantsContract.Presenter
+    private lateinit var mCareAssistantsAdapter: CareAssistantsAdapter
 
     override fun setPresenter(presenter: CareAssistantsContract.Presenter) {
         this.mPresenter = presenter
     }
 
-    override fun showCareAssistants(careAssistants: List<CareAssistant>) {
+    override fun showCareAssistants() {
         care_assistants_found_frame.visibility=View.VISIBLE
         care_assistants_not_found_frame.visibility=View.GONE
         care_assistants_connection_problem_frame.visibility=View.GONE
-
-        (care_assistants_found_recycler_view.adapter as CareAssistantsAdapter).items = careAssistants
-        care_assistants_found_recycler_view.adapter.notifyDataSetChanged()
     }
 
     override fun showCareAssistantsNotFound() {
@@ -56,6 +52,14 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
         care_assistant_row_surname.text=""
     }
 
+    override fun addCareAssistant(careAssistant: CareAssistant) {
+        mCareAssistantsAdapter.addItemToBeginning(careAssistant)
+    }
+
+    override fun removeCareAssistant(careAssistant: CareAssistant) {
+        mCareAssistantsAdapter.deleteItem(careAssistant)
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_care_assistants, container, false)
@@ -63,11 +67,12 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        care_assistants_found_recycler_view.adapter=CareAssistantsAdapter(object :CareAssistantsAdapter.ClickListener{
+        mCareAssistantsAdapter=CareAssistantsAdapter(object :CareAssistantsAdapter.ClickListener{
             override fun onRemoveButtonClicked(careAssistantId: Int) {
                 mPresenter.checkRemovingCareAssistatn(careAssistantId)
             }
         })
+        care_assistants_found_recycler_view.adapter = mCareAssistantsAdapter
         care_assistants_found_recycler_view.layoutManager=LinearLayoutManager(context)
 
         care_assistants_add_panel_fab.setOnClickListener {

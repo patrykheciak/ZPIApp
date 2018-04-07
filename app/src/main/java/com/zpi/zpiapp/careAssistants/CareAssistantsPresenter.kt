@@ -18,8 +18,10 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
         val list = careAssistantDAO.userList
         if (list == null) {
             careAssistantsView.showConnectionError()
-        } else if (!list.isEmpty())
-            careAssistantsView.showCareAssistants(list)
+        } else if (!list.isEmpty()){
+            careAssistantsView.showCareAssistants()
+            list.forEach{careAssistantsView.addCareAssistant(it)}
+        }
         else
             careAssistantsView.showCareAssistantsNotFound()
     }
@@ -27,9 +29,17 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
     override fun addNewCareAssistant(login: String) {
         val added = careAssistantDAO.allList.firstOrNull{careAssistant -> careAssistant.name == login }
         if(added != null){
-            careAssistantDAO.userList.add(added)
-            refreshCareAssistants()
-            careAssistantsView.clearAddCareAssistant()
+            if(careAssistantDAO.userList.contains(added))
+                careAssistantsView.showSnackBarError("Użytkownik jest już dodany")
+            else{
+                val empty = careAssistantDAO.userList.isEmpty()
+                careAssistantDAO.userList.add(added)
+                careAssistantsView.addCareAssistant(added)
+                careAssistantsView.clearAddCareAssistant()
+
+                if(empty) careAssistantsView.showCareAssistants()
+            }
+
         } else careAssistantsView.showSnackBarError("nie znaleziono podaengo urzytkownika")
 
     }
@@ -42,7 +52,9 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
     override fun removeCareAssistant(id: Int) {
         val remove = careAssistantDAO.userList.first { careAssistant -> careAssistant.idCareAssistant==id }
         careAssistantDAO.userList.remove(remove)
-        refreshCareAssistants()
+        careAssistantsView.removeCareAssistant(remove)
+        if (careAssistantDAO.userList.isEmpty())
+            careAssistantsView.showCareAssistantsNotFound()
     }
 
     private class CareAssistantsMockDAO{
