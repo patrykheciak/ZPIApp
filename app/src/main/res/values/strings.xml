@@ -26,4 +26,5 @@
     <string name="newCareAssistantLoginEditTextHint">Login opiekuna</string>
     <string name="careAssistantsNotFoundText">Dodaj nowego opiekuna</string>
     <string name="careAssistantsConnectionProblemText">Problem z połączeniem</string>
+    <string name="careAssistantsFragmentActionBar">Opiekunowie</string>
 </resources>

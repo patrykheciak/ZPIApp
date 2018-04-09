@@ -6,12 +6,8 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
-import com.zpi.zpiapp.careAssistants.CareAssistantsAdapter
-import com.zpi.zpiapp.careAssistants.CareAssistantsFragment
-import com.zpi.zpiapp.careAssistants.CareAssistantsPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
 import kotlinx.android.synthetic.main.activity_main.*

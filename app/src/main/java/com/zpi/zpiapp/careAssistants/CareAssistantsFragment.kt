@@ -27,15 +27,16 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
     }
 
     override fun showCareAssistants() {
-        care_assistants_found_frame.visibility=View.VISIBLE
         care_assistants_not_found_frame.visibility=View.GONE
         care_assistants_connection_problem_frame.visibility=View.GONE
+        care_assistants_found_frame.visibility=View.VISIBLE
+
     }
 
     override fun showCareAssistantsNotFound() {
+        care_assistants_connection_problem_frame.visibility=View.GONE
         care_assistants_found_frame.visibility=View.GONE
         care_assistants_not_found_frame.visibility=View.VISIBLE
-        care_assistants_connection_problem_frame.visibility=View.GONE
     }
 
     override fun showConnectionError() {
@@ -49,7 +50,7 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
     }
 
     override fun clearAddCareAssistant() {
-        care_assistant_row_surname.text=""
+        care_assistant_row_name.text=""
     }
 
     override fun addCareAssistant(careAssistant: CareAssistant) {
@@ -69,7 +70,7 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
         super.onViewCreated(view, savedInstanceState)
         mCareAssistantsAdapter=CareAssistantsAdapter(object :CareAssistantsAdapter.ClickListener{
             override fun onRemoveButtonClicked(careAssistantId: Int) {
-                mPresenter.checkRemovingCareAssistatn(careAssistantId)
+                mPresenter.checkRemovingCareAssistants(careAssistantId)
             }
         })
         care_assistants_found_recycler_view.adapter = mCareAssistantsAdapter
