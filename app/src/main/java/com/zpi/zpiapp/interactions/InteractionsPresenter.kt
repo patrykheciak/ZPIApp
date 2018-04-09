@@ -4,6 +4,7 @@ import android.util.Log
 import com.zpi.zpiapp.data.InteractionsService
 import com.zpi.zpiapp.model.Drug
 import com.zpi.zpiapp.model.Interaction
+import com.zpi.zpiapp.utlis.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,12 +19,8 @@ class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : 
     }
 
     override fun start() {
-        val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.105:49823/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-        retrofit.create(InteractionsService::class.java)
+        RetrofitInstance.interactionsService
                 .drugList()
                 .enqueue(object : Callback<List<Drug>> {
                     override fun onResponse(call: Call<List<Drug>>?, response: Response<List<Drug>>?) {
@@ -41,13 +38,18 @@ class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : 
 
                     override fun onFailure(call: Call<List<Drug>>?, t: Throwable?) {
                         Log.d("InteractionsPresenter", "" + t.toString())
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        call?.clone()?.enqueue(this)
                     }
 
                 })
     }
 
     override fun interact(drug1: String, drug2: String) {
+        if (::drugs.isInitialized.not()){
+            mInteractionsView.showError()
+            return
+        }
+
         val d1 = findDrugByName(drug1)
         val d2 = findDrugByName(drug2)
 
@@ -60,12 +62,7 @@ class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : 
             // ask API for interaction
 
             // probably we need to make it singleton and maybe put it in some better place
-            val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.105:49823/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-
-            retrofit.create(InteractionsService::class.java)
+            RetrofitInstance.interactionsService
                     .interact(d1.idDrug, d2.idDrug)
                     .enqueue(object : Callback<List<Interaction>> {
 
