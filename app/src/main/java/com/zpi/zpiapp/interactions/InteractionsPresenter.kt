@@ -60,8 +60,6 @@ class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : 
 
         if (d1 != null && d2 != null) {
             // ask API for interaction
-
-            // probably we need to make it singleton and maybe put it in some better place
             RetrofitInstance.interactionsService
                     .interact(d1.idDrug, d2.idDrug)
                     .enqueue(object : Callback<List<Interaction>> {
@@ -86,7 +84,6 @@ class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : 
                             mInteractionsView.showError()
                         }
                     })
-
         } else {
             mInteractionsView.hideInteractionSection()
         }
