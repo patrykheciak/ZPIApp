@@ -59,7 +59,7 @@ class CareAssistantsAdapter(val clickListener: ClickListener,
 
     inner class CareAssistantVH(override val containerView:View):RecyclerView.ViewHolder(containerView),LayoutContainer {
         fun bind(careAssistant: CareAssistant){
-            care_assistant_row_name.text="${careAssistant.surname} ${careAssistant.name}"
+            care_assistant_row_name.text="${careAssistant.name} ${careAssistant.surname}"
             care_assistant_row_login.text=careAssistant.login
 
             care_assostant_row_remove_button.setOnClickListener({

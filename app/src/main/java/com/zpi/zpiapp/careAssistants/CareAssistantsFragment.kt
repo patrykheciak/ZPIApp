@@ -99,13 +99,13 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
         val builder = AlertDialog.Builder(context)
 
         builder.setTitle("Usuwanie")
-                .setMessage("Czy na pewno chcesz usunąć ${careAssistant.name} ${careAssistant.surname}")
+                .setMessage("Czy na pewno chcesz usunąć ${careAssistant.name} ${careAssistant.surname}?")
                 .setPositiveButton(android.R.string.yes, { _, _ ->
                     mPresenter.removeCareAssistant(careAssistant.idCareAssistant)
                 })
                 .setNegativeButton(android.R.string.no, { _, _ ->
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.ic_error_outline_black_24px)
                 .show()
     }
 
