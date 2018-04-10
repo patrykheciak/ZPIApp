@@ -96,7 +96,7 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
     }
 
     override fun showRemoveDialog(careAssistant: CareAssistant) {
-        val builder = AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert)
+        val builder = AlertDialog.Builder(context)
 
         builder.setTitle("Usuwanie")
                 .setMessage("Czy na pewno chcesz usunąć ${careAssistant.name} ${careAssistant.surname}")
