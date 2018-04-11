@@ -50,7 +50,7 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
     }
 
     override fun clearAddCareAssistant() {
-        care_assistant_row_name.text=""
+        care_assistants_add_panel_login.text.clear()
     }
 
     override fun addCareAssistant(careAssistant: CareAssistant) {

@@ -23,8 +23,14 @@
 
     <string name="found_n_interactions">Znaleziono interakcje: %1$d</string>
     <string name="connection_error">Nie udało się połączyć z serwerem</string>
+
     <string name="newCareAssistantLoginEditTextHint">Login opiekuna</string>
     <string name="careAssistantsNotFoundText">Dodaj nowego opiekuna</string>
     <string name="careAssistantsConnectionProblemText">Problem z połączeniem</string>
     <string name="careAssistantsFragmentActionBar">Opiekunowie</string>
+
+    <string name="newPhysicianLoginEditTextHint">Numer pws lekarza</string>
+    <string name="physiciansNotFoundText">Dodaj nowego lekarza</string>
+    <string name="physiciansConnectionProblemText">Problem z połączeniem</string>
+    <string name="physiciansFragmentActionBar">Lekarze</string>
 </resources>

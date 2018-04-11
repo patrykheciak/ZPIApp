@@ -10,6 +10,7 @@ import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
+import com.zpi.zpiapp.physicians.PhysiciansActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -68,8 +69,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.title="Test"
-        startActivity(Intent(this,CareAssistantsActivity::class.java))
+        if(item?.title=="Opiekunowie")
+            startActivity(Intent(this,CareAssistantsActivity::class.java))
+        if(item?.title=="Lekarze")
+            startActivity(Intent(this,PhysiciansActivity::class.java))
         return true
     }
 }
