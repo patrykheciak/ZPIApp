@@ -31,6 +31,7 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                     override fun onFailure(call: Call<List<Physician>>?, t: Throwable?) {
                         physiciansView.showConnectionError()
                         physiciansView.showSnackBarError(t.toString())
+
                     }
 
                     override fun onResponse(call: Call<List<Physician>>?,
@@ -88,6 +89,7 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
         } else
             physiciansView.showSnackBarError("Lekarz o numerze $pwzNumber jest już dodany")
 
+        physiciansView.clearTextAndFocus()
     }
 
     override fun checkRemovingPhysician(id: Int) {

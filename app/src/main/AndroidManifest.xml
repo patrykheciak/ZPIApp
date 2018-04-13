@@ -24,10 +24,12 @@
         <activity
             android:name=".careAssistants.CareAssistantsActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="Zarządzanie opiekunami"/>
         <activity android:name=".physicians.PhysiciansActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="Zarządzanie lekarzami"/>
     </application>
 
 </manifest>

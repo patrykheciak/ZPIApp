@@ -19,6 +19,11 @@ import kotlinx.android.synthetic.main.fragment_care_assistants.*
 
 
 class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
+    override fun clearTextAndFocus() {
+        care_assistants_add_panel_login.setText("")
+        care_assistants_add_panel.clearFocus()
+    }
+
     private lateinit var mPresenter: CareAssistantsContract.Presenter
     private lateinit var mCareAssistantsAdapter: CareAssistantsAdapter
 
@@ -78,6 +83,8 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
 
         care_assistants_add_panel_fab.setOnClickListener {
             hideKeyboard()
+
+            //zmiana
             mPresenter.addNewCareAssistant(care_assistants_add_panel_login.text.toString() )
         }
     }

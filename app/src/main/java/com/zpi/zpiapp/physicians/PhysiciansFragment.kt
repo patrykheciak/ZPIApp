@@ -13,10 +13,16 @@ import android.view.inputmethod.InputMethodManager
 
 import com.zpi.zpiapp.R
 import com.zpi.zpiapp.model.Physician
+import kotlinx.android.synthetic.main.fragment_care_assistants.*
 import kotlinx.android.synthetic.main.fragment_physicians.*
 
 
 class PhysiciansFragment : Fragment(),PhysiciansContract.View {
+    override fun clearTextAndFocus() {
+        physicians_add_panel_pwz.setText("")
+        physicians_add_panel_pwz.clearFocus()
+    }
+
     private lateinit var mPresenter: PhysiciansContract.Presenter
     private lateinit var mPhysiciansAdapter: PhysiciansAdapter
 
@@ -77,6 +83,7 @@ class PhysiciansFragment : Fragment(),PhysiciansContract.View {
         physicians_add_panel_fab.setOnClickListener {
             hideKeyboard()
             mPresenter.addNewPhysician(physicians_add_panel_pwz.text.toString() )
+            physicians_add_panel_pwz.setText("")
         }
     }
 

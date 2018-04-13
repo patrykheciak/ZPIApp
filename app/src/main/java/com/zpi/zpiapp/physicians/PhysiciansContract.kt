@@ -14,6 +14,7 @@ interface PhysiciansContract {
         fun showRemoveDialog(physician: Physician)
         fun showSnackBarError(error:String )
         fun clearAddPhysician()
+        fun clearTextAndFocus()
     }
 
     interface Presenter : BasePresenter{

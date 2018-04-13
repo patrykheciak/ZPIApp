@@ -13,6 +13,7 @@ interface CareAssistantsContract {
         fun removeCareAssistant( careAssistant: CareAssistant )
         fun showRemoveDialog(careAssistant: CareAssistant)
         fun showSnackBarError(error:String )
+        fun clearTextAndFocus()
         fun clearAddCareAssistant()
     }
 

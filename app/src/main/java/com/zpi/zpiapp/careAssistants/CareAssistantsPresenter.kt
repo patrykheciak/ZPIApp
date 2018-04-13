@@ -88,6 +88,7 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
         } else
             careAssistantsView.showSnackBarError("Opiekun $login jest już dodany")
 
+        careAssistantsView.clearTextAndFocus()
     }
 
     override fun checkRemovingCareAssistants(id: Int) {
