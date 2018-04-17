@@ -10,6 +10,7 @@ import com.zpi.zpiapp.R
 
 class CareAssistantsActivity : AppCompatActivity() {
     lateinit var careAssistantsFragment : CareAssistantsFragment
+    private lateinit var presenter: CareAssistantsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +21,7 @@ class CareAssistantsActivity : AppCompatActivity() {
     private fun loadFragment(){
         if(::careAssistantsFragment.isInitialized.not()){
             careAssistantsFragment = CareAssistantsFragment()
-            CareAssistantsPresenter(careAssistantsFragment)
+            presenter = CareAssistantsPresenter(careAssistantsFragment)
 
         }
         supportFragmentManager.beginTransaction()
@@ -30,4 +31,8 @@ class CareAssistantsActivity : AppCompatActivity() {
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onViewDestroyed()
+    }
 }

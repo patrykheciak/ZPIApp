@@ -22,6 +22,7 @@ interface PhysiciansContract {
         fun checkRemovingPhysician(id : Int )
         fun removePhysician(id: Int)
         fun refreshPhysicians()
+        fun onViewDestroyed()
     }
 
 }

@@ -16,10 +16,12 @@ class PhysiciansActivity : AppCompatActivity() {
         loadFragment()
     }
 
+    private lateinit var presenter: PhysiciansPresenter
+
     private fun loadFragment(){
         if(::physiciansFragment.isInitialized.not()){
             physiciansFragment = PhysiciansFragment()
-            PhysiciansPresenter(physiciansFragment)
+            presenter = PhysiciansPresenter(physiciansFragment)
 
         }
         supportFragmentManager.beginTransaction()
@@ -28,5 +30,9 @@ class PhysiciansActivity : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onViewDestroyed()
+    }
 
 }

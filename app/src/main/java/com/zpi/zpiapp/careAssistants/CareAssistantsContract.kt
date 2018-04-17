@@ -22,6 +22,7 @@ interface CareAssistantsContract {
         fun checkRemovingCareAssistants(id : Int )
         fun removeCareAssistant(id: Int)
         fun refreshCareAssistants()
+        fun onViewDestroyed()
     }
 
 }

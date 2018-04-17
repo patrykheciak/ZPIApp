@@ -12,11 +12,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsContract.View) : CareAssistantsContract.Presenter {
+class CareAssistantsPresenter(private var careAssistantsView: CareAssistantsContract.View?) : CareAssistantsContract.Presenter {
+    override fun onViewDestroyed() {
+        careAssistantsView = null
+    }
+
     private val careAssistantBag = SimpleBag<CareAssistant>()
 
     init {
-        careAssistantsView.setPresenter(this)
+        careAssistantsView?.setPresenter(this)
     }
 
     override fun start() {
@@ -29,8 +33,8 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                 .patientCareAssistants(User.userId)
                 .enqueue(object : Callback<List<CareAssistant>> {
                     override fun onFailure(call: Call<List<CareAssistant>>?, t: Throwable?) {
-                        careAssistantsView.showConnectionError()
-                        careAssistantsView.showSnackBarError(t.toString())
+                        careAssistantsView?.showConnectionError()
+                        careAssistantsView?.showSnackBarError(t.toString())
                     }
 
                     override fun onResponse(call: Call<List<CareAssistant>>?,
@@ -48,10 +52,10 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                                 if (careAssistantBag.list.isEmpty().not()) {
                                     careAssistantBag
                                             .list
-                                            .forEach { careAssistantsView.addCareAssistant(it) }
-                                    careAssistantsView.showCareAssistants()
+                                            .forEach { careAssistantsView?.addCareAssistant(it) }
+                                    careAssistantsView?.showCareAssistants()
                                 } else
-                                    careAssistantsView.showCareAssistantsNotFound()
+                                    careAssistantsView?.showCareAssistantsNotFound()
                             }
                         }
                     }
@@ -64,7 +68,7 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                     .addCareAssistant(User.userId, login)
                     .enqueue(object : Callback<ResponseBody> {
                         override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                            careAssistantsView.showSnackBarError(t.toString())
+                            careAssistantsView?.showSnackBarError(t.toString())
                         }
 
                         override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -73,28 +77,28 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                                     it.body()?.string()?.let {
                                         val careAssistant = Gson().fromJson(it, CareAssistant::class.java)
                                         careAssistantBag.add(careAssistant)
-                                        careAssistantsView.addCareAssistant(careAssistant)
+                                        careAssistantsView?.addCareAssistant(careAssistant)
                                         if(careAssistantBag.list.size==1)
-                                            careAssistantsView.showCareAssistants()
+                                            careAssistantsView?.showCareAssistants()
                                     }
                                 } else {
                                     careAssistantsView
-                                            .showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
+                                            ?.showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
                                 }
                             }
                         }
                     })
 
         } else
-            careAssistantsView.showSnackBarError("Opiekun $login jest już dodany")
+            careAssistantsView?.showSnackBarError("Opiekun $login jest już dodany")
 
-        careAssistantsView.clearTextAndFocus()
+        careAssistantsView?.clearTextAndFocus()
     }
 
     override fun checkRemovingCareAssistants(id: Int) {
         val remove = careAssistantBag.list
                 .first { careAssistant -> careAssistant.idCareAssistant == id }
-        careAssistantsView.showRemoveDialog(remove)
+        careAssistantsView?.showRemoveDialog(remove)
     }
 
     override fun removeCareAssistant(id: Int) {
@@ -104,7 +108,7 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                 .removeCareAssistant(User.userId,id)
                 .enqueue(object :Callback<ResponseBody>{
                     override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                        careAssistantsView.showSnackBarError(t.toString())
+                        careAssistantsView?.showSnackBarError(t.toString())
                     }
 
                     override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -112,11 +116,11 @@ class CareAssistantsPresenter(private val careAssistantsView: CareAssistantsCont
                             if (it.isSuccessful) {
                                 careAssistantBag.remove(remove)
                                 if (careAssistantBag.list.isEmpty())
-                                    careAssistantsView.showCareAssistantsNotFound()
-                                careAssistantsView.removeCareAssistant(remove)
+                                    careAssistantsView?.showCareAssistantsNotFound()
+                                careAssistantsView?.removeCareAssistant(remove)
                             } else
                                 careAssistantsView
-                                        .showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
+                                        ?.showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
                         }
                     }
 

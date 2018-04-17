@@ -12,11 +12,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) : PhysiciansContract.Presenter {
+class PhysiciansPresenter(private var physiciansView: PhysiciansContract.View?) : PhysiciansContract.Presenter {
+    override fun onViewDestroyed() {
+        physiciansView = null
+    }
+
     private val physiciansBag = SimpleBag<Physician>()
 
     init {
-        physiciansView.setPresenter(this)
+        physiciansView?.setPresenter(this)
     }
 
     override fun start() {
@@ -29,8 +33,8 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                 .patientPhysicians(User.userId)
                 .enqueue(object : Callback<List<Physician>> {
                     override fun onFailure(call: Call<List<Physician>>?, t: Throwable?) {
-                        physiciansView.showConnectionError()
-                        physiciansView.showSnackBarError(t.toString())
+                        physiciansView?.showConnectionError()
+                        physiciansView?.showSnackBarError(t.toString())
 
                     }
 
@@ -49,10 +53,10 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                                 if (physiciansBag.list.isEmpty().not()) {
                                     physiciansBag
                                             .list
-                                            .forEach { physiciansView.addPhysician(it) }
-                                    physiciansView.showPhysicians()
+                                            .forEach { physiciansView?.addPhysician(it) }
+                                    physiciansView?.showPhysicians()
                                 } else
-                                    physiciansView.showPhysiciansNotFound()
+                                    physiciansView?.showPhysiciansNotFound()
                             }
                         }
                     }
@@ -65,7 +69,7 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                     .addPhysician(User.userId, pwzNumber)
                     .enqueue(object : Callback<ResponseBody> {
                         override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                            physiciansView.showSnackBarError(t.toString())
+                            physiciansView?.showSnackBarError(t.toString())
                         }
 
                         override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -74,38 +78,39 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                                     it.body()?.string()?.let {
                                         val physician = Gson().fromJson(it, Physician::class.java)
                                         physiciansBag.add(physician)
-                                        physiciansView.addPhysician(physician)
-                                        if(physiciansBag.list.size==1)
-                                            physiciansView.showPhysicians()
+                                        physiciansView?.addPhysician(physician)
+                                        if (physiciansBag.list.size == 1)
+                                            physiciansView?.showPhysicians()
                                     }
                                 } else {
                                     physiciansView
-                                            .showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
+                                            ?.showSnackBarError(it.errorBody()?.string()
+                                                    ?: "Nieznany błąd")
                                 }
                             }
                         }
                     })
 
         } else
-            physiciansView.showSnackBarError("Lekarz o numerze $pwzNumber jest już dodany")
+            physiciansView?.showSnackBarError("Lekarz o numerze $pwzNumber jest już dodany")
 
-        physiciansView.clearTextAndFocus()
+        physiciansView?.clearTextAndFocus()
     }
 
     override fun checkRemovingPhysician(id: Int) {
         val remove = physiciansBag.list
                 .first { physician -> physician.idPhysician == id }
-        physiciansView.showRemoveDialog(remove)
+        physiciansView?.showRemoveDialog(remove)
     }
 
     override fun removePhysician(id: Int) {
-        val remove = physiciansBag.list.first { physician -> physician.idPhysician==id }
+        val remove = physiciansBag.list.first { physician -> physician.idPhysician == id }
 
         RetrofitInstance.physiciansService
-                .removePhysician(User.userId,id)
-                .enqueue(object :Callback<ResponseBody>{
+                .removePhysician(User.userId, id)
+                .enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                        physiciansView.showSnackBarError(t.toString())
+                        physiciansView?.showSnackBarError(t.toString())
                     }
 
                     override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
@@ -113,15 +118,17 @@ class PhysiciansPresenter(private val physiciansView: PhysiciansContract.View) :
                             if (it.isSuccessful) {
                                 physiciansBag.remove(remove)
                                 if (physiciansBag.list.isEmpty())
-                                    physiciansView.showPhysiciansNotFound()
-                                physiciansView.removePhysician(remove)
+                                    physiciansView?.showPhysiciansNotFound()
+                                physiciansView?.removePhysician(remove)
                             } else
                                 physiciansView
-                                        .showSnackBarError(it.errorBody()?.string() ?: "Nieznany błąd")
+                                        ?.showSnackBarError(it.errorBody()?.string()
+                                                ?: "Nieznany błąd")
                         }
                     }
 
                 })
     }
+
 
 }
