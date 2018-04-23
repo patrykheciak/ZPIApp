@@ -10,6 +10,7 @@ import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
+import com.zpi.zpiapp.login.LoginActivity
 import com.zpi.zpiapp.physicians.PhysiciansActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -55,11 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-//        interactionsFragment = supportFragmentManager.findFragmentById(R.idDrug.content) as InteractionsFragment?
-//        if (interactionsFragment == null)
-//            interactionsFragment = InteractionsFragment()
-//        if (interactionsFragment != null)
-//            interactionsPresenter = InteractionsPresenter(interactionsFragment!!)
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

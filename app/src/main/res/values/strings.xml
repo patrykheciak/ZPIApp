@@ -33,4 +33,17 @@
     <string name="physiciansNotFoundText">Dodaj nowego lekarza</string>
     <string name="physiciansConnectionProblemText">Problem z połączeniem</string>
     <string name="physiciansFragmentActionBar">Lekarze</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_login">Login</string>
+    <string name="prompt_password">Hasło</string>
+    <string name="action_sign_in">Zarejestruj się</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">Ten adres email jest nieprawidłowy</string>
+    <string name="error_invalid_password">To hasło jest zbyt krotkie</string>
+    <string name="error_incorrect_password">To hasło jest nieprawidłowe</string>
+    <string name="error_field_required">To pole jest wymagane</string>
+
 </resources>
