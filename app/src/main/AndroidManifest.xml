@@ -32,10 +32,10 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:theme="@style/AppThemeTranslucentStatusBar"
             android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login"
 
-            android:label="@string/title_activity_login">
+            android:theme="@style/AppThemeTranslucentStatusBar">
         </activity>
     </application>
 

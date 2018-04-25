@@ -15,4 +15,12 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+
+    <!--Error label text style-->
+    <style name="MyErrorText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorWarning</item>
+    </style>
+
+
+
 </resources>

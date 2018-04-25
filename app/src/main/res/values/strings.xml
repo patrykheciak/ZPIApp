@@ -39,12 +39,16 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_login">Login</string>
     <string name="prompt_password">Hasło</string>
+    <string name="forgot_password">Zapomniałeś hasła?</string>
     <string name="action_sign_in">Zaloguj</string>
     <string name="action_sign_up">Zarejestruj</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">Ten adres email jest nieprawidłowy</string>
-    <string name="error_invalid_password">To hasło jest zbyt krotkie</string>
-    <string name="error_incorrect_password">To hasło jest nieprawidłowe</string>
-    <string name="error_field_required">To pole jest wymagane</string>
+    <string name="error_login_empty">Login nie moze byc pusty</string>
+    <string name="error_login_too_short">Login musi mieć co najmniej %1$d znakow</string>
+    <string name="error_email_empty">Email nie moze byc pusty</string>
+    <string name="error_email_invalid">Ten adres email jest nieprawidłowy</string>
+    <string name="error_password_empty">Haslo nie moze byc puste</string>
+    <string name="error_password_too_short">Haslo musi mieć co najmniej %1$d znakow</string>
+    <string name="signing_up">Rejestracja</string>
+    <string name="signing_in">Logowanie</string>
 
 </resources>
