@@ -7,22 +7,12 @@ import com.zpi.zpiapp.model.CareAssistant
 
 interface LoginContract {
     interface View: BaseView<Presenter> {
-//        fun showCareAssistants()
-//        fun showCareAssistantsNotFound()
-//        fun showConnectionError()
-//        fun addCareAssistant( careAssistant: CareAssistant)
-//        fun removeCareAssistant( careAssistant: CareAssistant)
-//        fun showRemoveDialog(careAssistant: CareAssistant)
-//        fun showSnackBarError(error:String )
-//        fun clearTextAndFocus()
-//        fun clearAddCareAssistant()
+        fun setSignUpForm()
+        fun setSignInForm()
     }
 
     interface Presenter : BasePresenter {
-//        fun addNewCareAssistant(login: String)
-//        fun checkRemovingCareAssistants(id : Int )
-//        fun removeCareAssistant(id: Int)
-//        fun refreshCareAssistants()
-//        fun onViewDestroyed()
+        fun signUpFormRequested()
+        fun signInFormRequested()
     }
 }

@@ -3,9 +3,11 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
+                                             android:animateLayoutChanges="true"
                                              android:background="@mipmap/login_background_1080"
                                              android:fitsSystemWindows="true"
-                                             tools:context="com.zpi.zpiapp.login.LoginActivity">
+                                             tools:context="com.zpi.zpiapp.login.LoginActivity"
+    >
 
     <ScrollView
         android:id="@+id/login_form"
@@ -17,12 +19,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <android.support.v7.widget.CardView
-            android:layout_gravity="center"
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             app:contentPadding="8dp"
@@ -122,12 +123,12 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
-                    android:id="@+id/email_sign_in_button"
+                    android:id="@+id/btn_sign_in_up"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_in"
+                    android:text="@string/action_sign_up"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/til_password"/>
 
