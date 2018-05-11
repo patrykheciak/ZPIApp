@@ -1,7 +1,6 @@
 package com.zpi.zpiapp.login
 
 import android.text.TextUtils
-import kotlin.math.log
 
 
 class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
@@ -71,7 +70,7 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
             mView.showProgress(true)
             when (loginType){
                 LoginType.SIGN_UP -> {
-                    
+
                 }
                 LoginType.SIGN_IN -> {
 

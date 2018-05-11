@@ -50,5 +50,6 @@
     <string name="error_password_too_short">Haslo musi mieć co najmniej %1$d znakow</string>
     <string name="signing_up">Rejestracja</string>
     <string name="signing_in">Logowanie</string>
+    <string name="title_drug_history">Historia zażywania</string>
 
 </resources>

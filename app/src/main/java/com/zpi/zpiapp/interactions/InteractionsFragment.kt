@@ -59,9 +59,11 @@ class InteractionsFragment : Fragment(), InteractionsContract.View {
     override fun setDrugs(drugs: List<Drug>) {
         mDrugs = drugs
         val drugStrings = mDrugs.map { it.name }
-        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, drugStrings)
-        drug1.setAdapter(adapter)
-        drug2.setAdapter(adapter)
+        if(context != null){
+            val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, drugStrings)
+            drug1.setAdapter(adapter)
+            drug2.setAdapter(adapter)
+        }
     }
 
 

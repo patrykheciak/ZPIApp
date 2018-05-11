@@ -17,6 +17,11 @@
         android:title="@string/title_notifications"/>
 
     <item
+        android:id="@+id/navigation_drug_history"
+        android:icon="@drawable/ic_baseline_history_24px"
+        android:title="@string/title_drug_history"/>
+
+    <item
         android:id="@+id/navigaation_iteractions"
         android:icon="@drawable/ic_compare_arrows_black_24px"
         android:title="@string/title_interactions"/>

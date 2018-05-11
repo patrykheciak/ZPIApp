@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 //Marcin -> http://192.168.43.98:49823/
 //Patryk -> http://192.168.0.31:49823/
 object RetrofitInstance {
-    private const val url: String = "http://10.183.31.142:49823/"
+    private const val url: String = "http://192.168.0.31:49823/"
 
     val retrofit = Retrofit.Builder()
             .baseUrl(url)

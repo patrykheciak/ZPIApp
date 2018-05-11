@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
+import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
 import com.zpi.zpiapp.login.LoginActivity
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var interactionsFragment: InteractionsFragment
     lateinit var interactionsPresenter: InteractionsPresenter
+    lateinit var drugHistoryFragment: DrugHistoryFragment
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -28,6 +30,14 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_drug_history -> {
+                if (::drugHistoryFragment.isInitialized.not()) {
+                    drugHistoryFragment = DrugHistoryFragment()
+//                    drugHistoryPresenter = DrugHistoryPresenter(interactionsFragment)
+                }
+                replaceFragment(drugHistoryFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigaation_iteractions -> {
@@ -56,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        startActivity(Intent(this, LoginActivity::class.java))
+//        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
