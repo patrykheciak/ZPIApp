@@ -9,9 +9,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
+import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
-import com.zpi.zpiapp.login.LoginActivity
 import com.zpi.zpiapp.physicians.PhysiciansActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var interactionsFragment: InteractionsFragment
     lateinit var interactionsPresenter: InteractionsPresenter
     lateinit var drugHistoryFragment: DrugHistoryFragment
+    lateinit var drugHistoryPresenter: DrugHistoryPresenter
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_drug_history -> {
                 if (::drugHistoryFragment.isInitialized.not()) {
                     drugHistoryFragment = DrugHistoryFragment()
-//                    drugHistoryPresenter = DrugHistoryPresenter(interactionsFragment)
+                    drugHistoryPresenter = DrugHistoryPresenter(drugHistoryFragment)
                 }
                 replaceFragment(drugHistoryFragment)
                 return@OnNavigationItemSelectedListener true

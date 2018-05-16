@@ -21,6 +21,8 @@
         <item name="android:textColor">@color/colorWarning</item>
     </style>
 
-
+    <style name="MyCustomBetterPickersDialogs" parent="BetterPickersRadialTimePickerDialog.PrimaryColor">
+        <item name="bpDisabledDayTextColor">#eeeeee</item>
+    </style>
 
 </resources>

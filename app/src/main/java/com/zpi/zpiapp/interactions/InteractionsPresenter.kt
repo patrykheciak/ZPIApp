@@ -1,15 +1,12 @@
 package com.zpi.zpiapp.interactions
 
 import android.util.Log
-import com.zpi.zpiapp.data.InteractionsService
 import com.zpi.zpiapp.model.Drug
 import com.zpi.zpiapp.model.Interaction
 import com.zpi.zpiapp.utlis.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class InteractionsPresenter(val mInteractionsView: InteractionsContract.View) : InteractionsContract.Presenter {
     private lateinit var drugs: List<Drug>
