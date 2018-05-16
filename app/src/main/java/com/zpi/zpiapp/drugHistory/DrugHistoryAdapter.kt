@@ -34,19 +34,41 @@ class DrugHistoryAdapter(var items: List<PatientDrug> = emptyList()) : RecyclerV
         fun bind(patientDrug: PatientDrug) {
             tvPatientDrugName.text = patientDrug.drugName
 
-            cbRano.isEnabled = patientDrug.morning > 0
-            cbPoludnie.isEnabled = patientDrug.midday > 0
-            cbWieczor.isEnabled = patientDrug.night > 0
+            cb_morning.isEnabled = patientDrug.morning > 0
+            cb_midday.isEnabled = patientDrug.midday > 0
+            cb_night.isEnabled = patientDrug.night > 0
 
             patientDrug.callendarRows?.let {
+                var isAnnotated = false
+                val sb = StringBuffer()
+                sb.append("Uwagi:\n")
                 for (row in it) {
-                    if (row.hasMorning)
-                        cbRano.isChecked = true
-                    if (row.hasMidday)
-                        cbPoludnie.isChecked = true
-                    if (row.hasNight)
-                        cbWieczor.isChecked = true
-                    Log.d("DrugHistoryAdapter", "$it")
+                    if (row.hasMorning) {
+                        cb_morning.isChecked = true
+                        if (row.annotation.isNotEmpty()){
+                            sb.append("rano - ${row.annotation}")
+                            isAnnotated = true
+                        }
+                    }
+                    if (row.hasMidday) {
+                        cb_midday.isChecked = true
+                        if (row.annotation.isNotEmpty()) {
+                            sb.append("południe - ${row.annotation}")
+                            isAnnotated = true
+                        }
+                    }
+                    if (row.hasNight) {
+                        cb_night.isChecked = true
+                        if (row.annotation.isNotEmpty())
+                        {
+                            sb.append("wieczór - ${row.annotation}")
+                            isAnnotated = true
+                        }
+                    }
+                    if (isAnnotated) {
+                        tv_annotation.visibility = View.VISIBLE
+                        tv_annotation.text = sb.toString()
+                    }
                 }
             }
         }
