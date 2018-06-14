@@ -11,7 +11,7 @@ interface PhysiciansContract {
         fun showConnectionError()
         fun addPhysician( physician: Physician )
         fun removePhysician( physician: Physician )
-        fun showRemoveDialog(physician: Physician)
+        fun showRemoveDialog( physician: Physician )
         fun showSnackBarError(error:String )
         fun clearAddPhysician()
         fun clearTextAndFocus()

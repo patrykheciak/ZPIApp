@@ -16,4 +16,7 @@ interface PhysiciansService {
     @PUT("api/patients/physicianRemove/{userId}/{psId}")
     fun removePhysician(@Path("userId") userId: Int,
                             @Path("psId") physicianId:Int): Call<ResponseBody>
+
+    @GET( "api/Physicians" )
+    fun getAllPhysicians():Call<List<Physician>>
 }

@@ -15,7 +15,7 @@ import com.google.gson.Gson
 //Marcin -> http://192.168.43.98:49823/
 //Patryk -> http://192.168.0.31:49823/
 object RetrofitInstance {
-    private const val url: String = "http://192.168.0.31:49823/"
+    private const val url: String = "http://192.168.43.98:49823/"
 
     var gson = GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")

@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
+import com.zpi.zpiapp.currentDrugsList.CurrentDrugsFragment
+import com.zpi.zpiapp.currentDrugsList.CurrentDrugsPresenter
 import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
 import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
 import com.zpi.zpiapp.physicians.PhysiciansActivity
+import com.zpi.zpiapp.utlis.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,13 +24,20 @@ class MainActivity : AppCompatActivity() {
     lateinit var interactionsPresenter: InteractionsPresenter
     lateinit var drugHistoryFragment: DrugHistoryFragment
     lateinit var drugHistoryPresenter: DrugHistoryPresenter
+    lateinit var currentDrugsFragment: CurrentDrugsFragment
+    lateinit var currentDrugsPresenter: CurrentDrugsPresenter
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_current_drugs -> {
+                if(::currentDrugsFragment.isInitialized.not()){
+                    currentDrugsFragment = CurrentDrugsFragment.newInstance(User.userId)
+                    currentDrugsPresenter = CurrentDrugsPresenter(currentDrugsFragment)
+                }
+                replaceFragment(currentDrugsFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {

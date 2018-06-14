@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@mipmap/background"
+
     android:fitsSystemWindows="true"
     tools:context="com.zpi.zpiapp.login.LoginActivity">
 
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:background="?attr/selectableItemBackground"
+
                     android:clickable="true"
                     android:padding="2dp"
                     android:text="@string/forgot_password"

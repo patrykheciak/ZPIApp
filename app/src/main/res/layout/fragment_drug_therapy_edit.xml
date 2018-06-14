@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drugTherapyRoot">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/drugTherapyDrugNameIL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.zpi.zpiapp.utlis.MyAutoCompleteTextView
+            android:id="@+id/drugName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nazwa leku" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/drugTherapyOkButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:text="Dodaj"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/drugTherapyStartDateButtonTV"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_weight="1"
+    app:layout_constraintEnd_toStartOf="@+id/guideline5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/drugTherapyDrugNameIL"
+        android:text="Data początku kuracji"
+    />
+
+    <Button
+        android:id="@+id/drugTherapyStartDateButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyStartDateButtonTV"
+        tools:text="21-11-2018" />
+
+    <TextView
+        android:id="@+id/drugTherapyEndDateButtonTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/drugTherapyDrugNameIL"
+        android:text="Data końca kuracji"/>
+
+    <Button
+        android:id="@+id/drugTherapyEndDateButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/drugTherapyEndDateButtonTV"
+        tools:text="21-11-2018" />
+
+
+    <EditText
+        android:id="@+id/drugTherapyAnnotation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/drugTherapyEveningDoseTI"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyAnnotationTV" />
+
+    <TextView
+        android:id="@+id/drugTherapyDosageTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Dawki"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyStartDateButton" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/drugTherapyPhysicianIL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/hasEndDateCB">
+
+        <com.zpi.zpiapp.utlis.MyAutoCompleteTextView
+            android:id="@+id/drugTherapyPhysician"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/newPhysicianLoginEditTextHint"
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/drugTherapyAnnotationTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Adnotacja"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/drugTherapyPhysicianIL" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/drugTherapyMorningDoseTI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyDosageTV">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/drugTherapyMorningDose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rano"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/drugTherapyNoonDoseTI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyMorningDoseTI">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/drugTherapyNoonDose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Połódnie"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/drugTherapyEveningDoseTI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyNoonDoseTI">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/drugTherapyEveningDose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wieczór"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/hasEndDateCB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Ma datę końcową"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@id/drugTherapyEndDateButton" />
+
+
+</android.support.constraint.ConstraintLayout>

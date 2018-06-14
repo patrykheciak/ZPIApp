@@ -51,5 +51,6 @@
     <string name="signing_up">Rejestracja</string>
     <string name="signing_in">Logowanie</string>
     <string name="title_drug_history">Historia zażywania</string>
+    <string name="title_current_drugs">Leki</string>
 
 </resources>

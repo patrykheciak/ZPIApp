@@ -1,16 +1,15 @@
 package com.zpi.zpiapp.careAssistants
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment
 import com.zpi.zpiapp.R
+import java.util.*
 
 
 class CareAssistantsActivity : AppCompatActivity() {
-    lateinit var careAssistantsFragment : CareAssistantsFragment
-    private lateinit var presenter: CareAssistantsPresenter
+    lateinit var mCareAssistantsFragment : CareAssistantsFragment
+    private lateinit var mPresenter: CareAssistantsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,20 +18,21 @@ class CareAssistantsActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(){
-        if(::careAssistantsFragment.isInitialized.not()){
-            careAssistantsFragment = CareAssistantsFragment()
-            presenter = CareAssistantsPresenter(careAssistantsFragment)
+        if(::mCareAssistantsFragment.isInitialized.not()){
+            mCareAssistantsFragment = CareAssistantsFragment()
+            mPresenter = CareAssistantsPresenter(mCareAssistantsFragment)
 
         }
         supportFragmentManager.beginTransaction()
-                .replace(R.id.care_assistants_activity_frame,careAssistantsFragment)
+                .replace(R.id.care_assistants_activity_frame,mCareAssistantsFragment)
                 .commit()
-
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onViewDestroyed()
+        mPresenter.onViewDestroyed()
     }
+
+
 }
