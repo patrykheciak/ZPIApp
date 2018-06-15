@@ -1,5 +1,6 @@
 package com.zpi.zpiapp.editPatientDrug
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -8,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment
 import com.codetroopers.betterpickers.calendardatepicker.MonthAdapter
-
 import com.zpi.zpiapp.R
 import com.zpi.zpiapp.model.Drug
 import com.zpi.zpiapp.model.PatientDrug
@@ -19,10 +20,6 @@ import com.zpi.zpiapp.model.Physician
 import kotlinx.android.synthetic.main.fragment_drug_therapy_edit.*
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.app.Activity
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
 
 
 class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
@@ -80,7 +77,7 @@ class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
         drugTherapyNoonDose.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) mPresenter.setMidday(drugTherapyNoonDose.text.toString()) }
         drugTherapyEveningDose.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) mPresenter.setNight(drugTherapyEveningDose.text.toString()) }
 
-        drugTherapyAnnotation.setOnFocusChangeListener{_,hasFocus->if(!hasFocus) mPresenter.setAnnotation(drugTherapyAnnotation.text.toString())}
+        drugTherapyAnnotation.setOnFocusChangeListener { _, hasFocus -> if (!hasFocus) mPresenter.setAnnotation(drugTherapyAnnotation.text.toString()) }
 
         drugTherapyOkButton.setOnClickListener {
             hideKeyboard()
@@ -100,7 +97,7 @@ class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
             drugTherapyEndDateButton.text = mSimpleDateFormat.format(it.dateStop ?: Date())
             setEditPatientDrug()
         }
-        if (mPatientDrug==null){
+        if (mPatientDrug == null) {
             drugTherapyStartDateButton.text = mSimpleDateFormat.format(Date())
             drugTherapyEndDateButton.text = mSimpleDateFormat.format(Date())
         }

@@ -196,7 +196,7 @@
             android:id="@+id/drugTherapyNoonDose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Połódnie"
+            android:hint="Południe"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 

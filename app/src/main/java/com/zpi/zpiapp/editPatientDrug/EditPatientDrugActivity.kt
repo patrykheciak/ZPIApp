@@ -14,7 +14,7 @@ class EditPatientDrugActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_care_assistants)
 
-        val patientDrug = if ( intent.extras!=null && intent.extras.containsKey(EXTRA_PATIENT_DRUG))
+        val patientDrug = if (intent.extras != null && intent.extras.containsKey(EXTRA_PATIENT_DRUG))
             intent.extras.getSerializable(EXTRA_PATIENT_DRUG) as? PatientDrug else null
         loadFragment(patientDrug)
     }
