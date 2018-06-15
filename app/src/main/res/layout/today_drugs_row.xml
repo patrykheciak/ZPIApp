@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/todayDrugDrugName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nazwa leku"/>
+
+        <TextView
+            android:id="@+id/todayDrugDrugDose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugDrugName"
+            tools:text="Dawka leku" />
+
+        <TextView
+            android:id="@+id/todayDrugPatientDrugAnnotation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugDrugDose"
+            tools:text="Zapij mlekiem"
+
+            />
+        <android.support.constraint.Guideline
+            android:id="@+id/todayDrugGuideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3333"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/todayDrugGuideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6666"/>
+
+        <TextView
+            android:id="@+id/todayDrugMorningTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugPatientDrugAnnotation"
+            tools:text="Rano" />
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/todayDrugMiddayTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline2"
+            app:layout_constraintStart_toEndOf="@id/todayDrugGuideline1"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugPatientDrugAnnotation"
+            tools:text="Południe" />
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/todayDrugNightTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="@id/todayDrugGuideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugPatientDrugAnnotation"
+            tools:text="Wieczór" />
+
+        <Button
+            android:id="@+id/todayDrugMorningBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            tools:text="0"
+            app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugMorningTV"
+            />
+
+        <Button
+            android:id="@+id/todayDrugMiddayBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            tools:text="0"
+            app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline2"
+            app:layout_constraintStart_toEndOf="@id/todayDrugGuideline1"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugMiddayTV"
+            />
+
+        <Button
+            android:id="@+id/todayDrugNightBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            tools:text="0"
+            app:layout_constraintStart_toStartOf="@id/todayDrugGuideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todayDrugNightTV"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

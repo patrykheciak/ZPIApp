@@ -32,7 +32,7 @@ class CurrentDrugsPresenter(private var currentDrugsView:CurrentDrugsContract.Vi
     }
 
     override fun loadDrugs() {
-        currentDrugsList.clear();
+        currentDrugsList.clear()
         RetrofitInstance.patientDrugService
                 .currentPatientsDrugs(userId)
                 .enqueue(object : Callback<List<PatientDrug>> {
