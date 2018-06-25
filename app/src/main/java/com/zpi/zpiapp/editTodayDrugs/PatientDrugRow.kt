@@ -25,8 +25,10 @@ data class PatientDrugRow(
 
     companion object {
         fun create(patientDrug: PatientDrug): PatientDrugRow {
-            val hasRow = patientDrug.callendarRows.isEmpty().not()
-            val row = if (hasRow) patientDrug.callendarRows[0] else null
+            val hasRow = if (patientDrug.callendarRows!=null)
+                patientDrug.callendarRows!!.isEmpty().not() else false
+            val row = if (hasRow)
+                patientDrug.callendarRows!![0] else null
 
             val idRow = row?.idRow
             val hasMorning = row?.hasMorning ?: false

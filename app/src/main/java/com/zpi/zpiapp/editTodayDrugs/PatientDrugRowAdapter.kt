@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zpi.zpiapp.R
-import com.zpi.zpiapp.drugHistory.DrugHistoryAdapter
+import com.zpi.zpiapp.utlis.Utils
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.today_drugs_row.*
 
 
 class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableListOf()):RecyclerView.Adapter<PatientDrugRowAdapter.PatientDrugVH>() {
@@ -32,8 +33,24 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
 
     inner class PatientDrugVH(override val containerView: View):RecyclerView.ViewHolder(containerView),LayoutContainer {
         fun bind( patientDrugRow:PatientDrugRow ){
-
+            todayDrugDrugName.text = patientDrugRow.drugName
+            patientDrugRow.drugDose.let {
+                if (it.isEmpty())
+                    Utils.hideView(todayDrugDrugDose)
+                else
+                    todayDrugDrugDose.text= "Dawka: " + patientDrugRow.drugDose
+            }
+            patientDrugRow.patientDrugAnnotation.let {
+                if (it.isEmpty())
+                    Utils.hideView(todayDrugPatientDrugAnnotation)
+                else
+                    todayDrugPatientDrugAnnotation.text = patientDrugRow.patientDrugAnnotation
+            }
+            todayDrugMorningBtn.text= patientDrugRow.morning.toString()
+            todayDrugMiddayBtn.text = patientDrugRow.midday.toString()
+            todayDrugNightBtn.text = patientDrugRow.night.toString()
         }
+
     }
 
 }

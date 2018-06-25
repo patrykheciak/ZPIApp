@@ -12,6 +12,8 @@ import com.zpi.zpiapp.currentDrugsList.CurrentDrugsFragment
 import com.zpi.zpiapp.currentDrugsList.CurrentDrugsPresenter
 import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
 import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
+import com.zpi.zpiapp.editTodayDrugs.EditTodayDrugsFragment
+import com.zpi.zpiapp.editTodayDrugs.EditTodayDrugsPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
 import com.zpi.zpiapp.physicians.PhysiciansActivity
@@ -26,10 +28,17 @@ class MainActivity : AppCompatActivity() {
     lateinit var drugHistoryPresenter: DrugHistoryPresenter
     lateinit var currentDrugsFragment: CurrentDrugsFragment
     lateinit var currentDrugsPresenter: CurrentDrugsPresenter
+    lateinit var editTodayDrugsFragment: EditTodayDrugsFragment
+    lateinit var editTodayDrugsPresenter: EditTodayDrugsPresenter
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                if (::editTodayDrugsFragment.isInitialized.not()){
+                    editTodayDrugsFragment = EditTodayDrugsFragment()
+                    editTodayDrugsPresenter = EditTodayDrugsPresenter(editTodayDrugsFragment)
+                }
+                replaceFragment(editTodayDrugsFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_current_drugs -> {

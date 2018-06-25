@@ -97,7 +97,6 @@ class EditPatientDrugPresenter(private var mEditPatientDrugView: EditPatientDrug
                         Log.d("EPDPresenter", "" + t.toString())
                         sendDataLock = false
                         mEditPatientDrugView?.showSnackBarError("Brak połączenia")
-
                     }
 
                     override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {

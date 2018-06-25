@@ -16,5 +16,5 @@ data class PatientDrug(
         var morning: Int,
         var night: Int,
         var drugAnnotation: String,
-        var callendarRows: List<CalendarRow>
+        var callendarRows: List<CalendarRow>?
 ):Serializable

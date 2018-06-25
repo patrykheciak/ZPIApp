@@ -1,10 +1,18 @@
 package com.zpi.zpiapp.utlis
 
+import android.view.View
 import java.util.*
 
 
 
 object Utils{
+    fun hideView( view:View ){
+        view.visibility=View.GONE
+    }
+    fun showView( view: View ){
+        view.visibility=View.VISIBLE
+    }
+
     /**
      * sets all the time related fields to ZERO!
      *

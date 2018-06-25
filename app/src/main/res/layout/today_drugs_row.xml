@@ -60,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="Rano"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline1"
@@ -68,11 +69,12 @@
             tools:text="Rano" />
 
         <TextView
-            android:textAlignment="center"
             android:id="@+id/todayDrugMiddayTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="Południe"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toStartOf="@id/todayDrugGuideline2"
             app:layout_constraintStart_toEndOf="@id/todayDrugGuideline1"
@@ -80,14 +82,15 @@
             tools:text="Południe" />
 
         <TextView
-            android:textAlignment="center"
             android:id="@+id/todayDrugNightTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="Wieczór"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toStartOf="@id/todayDrugGuideline2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/todayDrugGuideline2"
             app:layout_constraintTop_toBottomOf="@id/todayDrugPatientDrugAnnotation"
             tools:text="Wieczór" />
 

@@ -1,5 +1,6 @@
 package com.zpi.zpiapp.editTodayDrugs
 
+import android.util.Log
 import com.zpi.zpiapp.model.PatientDrug
 import com.zpi.zpiapp.utlis.RetrofitInstance
 import com.zpi.zpiapp.utlis.User.userId
@@ -11,13 +12,31 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
 
     val patientDrugRowList:MutableList<PatientDrugRow> = mutableListOf()
 
+    init {
+        mEditTodayDrugsView?.setPresenter(this)
+    }
 
     override fun start() {
         loadDrugRow()
     }
 
     override fun editPatientDrug(patientDrugRow: PatientDrugRow) {
+        RetrofitInstance.patientDrugService
+                .postPatientDrugCallendarRow(patientDrugRow.idPatientDrug,patientDrugRow.toCalendarRow())
+                .enqueue(object :Callback<Int>{
+                    override fun onFailure(call: Call<Int>?, t: Throwable?) {
+                        Log.d("ETDPresenter", "" + t.toString())
+                    }
 
+                    override fun onResponse(call: Call<Int>?, response: Response<Int>?) {
+                        response?.let {
+                            if(it.isSuccessful)
+                                it.body()?.let {
+                                    patientDrugRow.idRow=it
+                                }
+                        }
+                    }
+                })
     }
 
     override fun onViewDestroyed() {
@@ -39,7 +58,6 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
                         }
                         mEditTodayDrugsView?.setPatientDrugsRow(patientDrugRowList)
                     }
-
                     override fun onFailure(call: Call<List<PatientDrug>>?, t: Throwable?) {
                         mEditTodayDrugsView?.showSnackBarMessage(t.toString())
                         if (mEditTodayDrugsView!=null)

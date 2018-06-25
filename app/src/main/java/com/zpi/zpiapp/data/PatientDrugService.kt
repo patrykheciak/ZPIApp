@@ -1,6 +1,7 @@
 package com.zpi.zpiapp.data
 
 
+import com.zpi.zpiapp.model.CalendarRow
 import com.zpi.zpiapp.model.PatientDrug
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -24,4 +25,7 @@ interface PatientDrugService {
 
     @PUT("api/PatientDrug/{pdId}")
     fun updatePatientDrug( @Path("pdId") pdId:Int, @Body patientDrug: PatientDrug ):Call<ResponseBody>
+
+    @POST("api/PatientDrug/drugCallendarRow/{idPd}")
+    fun postPatientDrugCallendarRow( @Path("idPd")idPd:Int,@Body patientDrugRow:CalendarRow):Call<Int>
 }
