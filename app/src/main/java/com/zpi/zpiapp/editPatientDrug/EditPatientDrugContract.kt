@@ -17,6 +17,8 @@ interface EditPatientDrugContract {
         fun drugNotExistError()
         fun pwzNotExistError()
         fun dateError()
+
+        fun close()
     }
 
     interface Presenter : BasePresenter {

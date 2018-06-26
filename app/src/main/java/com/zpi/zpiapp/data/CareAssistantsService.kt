@@ -9,6 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface CareAssistantsService{
+
     @GET("api/patients/careassistants/{userId}")
     fun patientCareAssistants(@Path("userId") userId: Int): Call<List<CareAssistant>>
 

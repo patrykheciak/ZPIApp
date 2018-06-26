@@ -1,8 +1,9 @@
 package com.zpi.zpiapp.model
 
+import java.io.Serializable
 import java.util.*
 
-data class CalendarRow(
+data class CalendarRow (
         var idRow: Int?,
         var idPatientDrug: Int,
         var hasMorning: Boolean,
@@ -10,4 +11,4 @@ data class CalendarRow(
         var hasNight: Boolean,
         var date: Date,
         var annotation: String
-)
+):Serializable

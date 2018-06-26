@@ -127,8 +127,10 @@ class EditPatientDrugPresenter(private var mEditPatientDrugView: EditPatientDrug
                     override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
                         sendDataLock = false
                         response?.let {
-                            if (it.isSuccessful)
+                            if (it.isSuccessful){
                                 mEditPatientDrugView?.showSnackBarError("Dodano")
+                                mEditPatientDrugView?.close()
+                            }
                             else mEditPatientDrugView?.showSnackBarError(it.errorBody()?.string()
                                     ?: "Nieznany błąd")
                         }

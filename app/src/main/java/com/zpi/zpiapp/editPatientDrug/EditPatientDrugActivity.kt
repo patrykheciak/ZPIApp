@@ -6,7 +6,9 @@ import com.zpi.zpiapp.R
 import com.zpi.zpiapp.model.PatientDrug
 
 
-class EditPatientDrugActivity : AppCompatActivity() {
+class EditPatientDrugActivity : AppCompatActivity(),EditPatientDrugFragment.EditPatientDrugFragmentListener {
+
+
     lateinit var editPatientDrugFragment: EditPatientDrugFragment
     private lateinit var presenter: EditPatientDrugPresenter
 
@@ -42,6 +44,10 @@ class EditPatientDrugActivity : AppCompatActivity() {
 
     companion object {
         val EXTRA_PATIENT_DRUG = "EXTRA_PATIENT_DRUG"
+    }
+
+    override fun close() {
+        finish()
     }
 
 }

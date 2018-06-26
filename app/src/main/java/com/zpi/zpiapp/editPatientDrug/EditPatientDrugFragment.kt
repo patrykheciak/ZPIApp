@@ -1,5 +1,6 @@
 package com.zpi.zpiapp.editPatientDrug
 
+import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -23,8 +24,12 @@ import java.util.*
 
 
 class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
+
     var mShake: Animation? = null
     val mSimpleDateFormat = SimpleDateFormat("dd MMMM yyyy")
+    var mEditPatientDrugFragmentListener:EditPatientDrugFragmentListener?=null
+
+
 
     override fun drugNotExistError() {
         drugTherapyDrugNameIL.startAnimation(mShake)
@@ -55,6 +60,16 @@ class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             mPatientDrug = arguments.getSerializable(ARG_PATIENT_DRUG) as? PatientDrug
+        }
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        try {
+            mEditPatientDrugFragmentListener=  context as EditPatientDrugFragmentListener
+        } catch(e:ClassCastException) {
+            throw ClassCastException(context.toString()
+                    + " must implement OnHeadlineSelectedListener");
         }
     }
 
@@ -194,6 +209,15 @@ class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
             view.clearFocus()
         }
+    }
+
+
+    override fun close() {
+
+    }
+
+    interface EditPatientDrugFragmentListener {
+        fun close()
     }
 
 
