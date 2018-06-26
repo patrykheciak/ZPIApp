@@ -8,12 +8,12 @@ import com.zpi.zpiapp.model.PatientDrug
 interface EditTodayDrugsContract {
     interface View:BaseView<Presenter>{
         fun setPatientDrugsRow( patientDrugRow:List<PatientDrugRow> )
+        fun updatePatientDrugRow( patientDrugRow: PatientDrugRow )
         fun showSnackBarMessage( message:String )
     }
 
     interface Presenter:BasePresenter{
         fun editPatientDrug( patientDrugRow:PatientDrugRow )
-
         fun onViewDestroyed()
     }
 

@@ -32,7 +32,7 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
                         response?.let {
                             if(it.isSuccessful)
                                 it.body()?.let {
-                                    patientDrugRow.idRow=it
+                                    update(it,patientDrugRow)
                                 }
                         }
                     }
@@ -64,6 +64,16 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
                             call?.clone()?.enqueue(this)
                     }
                 } )
+    }
+
+    fun update(newRowId: Int, patientDrugRow: PatientDrugRow  ){
+        val replaceItemIndex = patientDrugRowList.indexOfFirst {
+            it.idPatientDrug==patientDrugRow.idPatientDrug
+        }
+        patientDrugRowList.removeAt(replaceItemIndex)
+        patientDrugRowList.add(replaceItemIndex,patientDrugRow)
+        patientDrugRow.idRow=newRowId
+
     }
 
 

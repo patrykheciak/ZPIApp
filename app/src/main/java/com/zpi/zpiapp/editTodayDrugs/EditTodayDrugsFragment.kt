@@ -37,7 +37,7 @@ class EditTodayDrugsFragment : Fragment(),EditTodayDrugsContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPatientDrugRowAdapter = PatientDrugRowAdapter()
+        mPatientDrugRowAdapter = PatientDrugRowAdapter(onButtonClick = mPresenter::editPatientDrug)
         todayDrugRV.adapter = mPatientDrugRowAdapter
         todayDrugRV.layoutManager = LinearLayoutManager(context)
     }
@@ -45,6 +45,10 @@ class EditTodayDrugsFragment : Fragment(),EditTodayDrugsContract.View {
     override fun onResume() {
         super.onResume()
         mPresenter.start()
+    }
+
+    override fun updatePatientDrugRow(patientDrugRow: PatientDrugRow) {
+        mPatientDrugRowAdapter.update(patientDrugRow)
     }
 
 }

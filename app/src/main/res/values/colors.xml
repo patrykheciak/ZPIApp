@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
-
-    <color name="colorWarning">#d32f2f</color>
+    <color name="colorWarning">#d32f2f</color>#4CAF50
+    <color name="activeBtnTodayDrugs">#4CAF50</color>
+    <color name="inactiveBtnTodayDrugs">#FDD835</color>
 </resources>
