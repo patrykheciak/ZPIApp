@@ -7,21 +7,17 @@ import retrofit2.http.*
 
 interface PhysiciansService {
 
-    @GET("$route/physician/{userId}")
+    @GET("api/patients/physician/{userId}")
     fun patientPhysicians(@Path("userId") userId: Int): Call<List<Physician>>
 
-    @PUT("$route/physician/{userId}/{pwzNumber}")
+    @PUT("api/patients/physician/{userId}/{pwzNumber}")
     fun addPhysician(@Path("userId") userId: Int,
                          @Path("pwzNumber") pwzNumber: String): Call<ResponseBody>
 
-    @PUT("$route/physicianRemove/{userId}/{psId}")
+    @PUT("api/patients/physicianRemove/{userId}/{psId}")
     fun removePhysician(@Path("userId") userId: Int,
                             @Path("psId") physicianId:Int): Call<ResponseBody>
 
-    @GET(route)
+    @GET( "api/Physicians" )
     fun getAllPhysicians():Call<List<Physician>>
-
-    private companion object {
-        const val route="api/Physician"
-    }
 }
