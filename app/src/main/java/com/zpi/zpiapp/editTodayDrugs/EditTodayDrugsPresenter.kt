@@ -12,6 +12,8 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
 
     val patientDrugRowList:MutableList<PatientDrugRow> = mutableListOf()
 
+    var connectCounter = 0
+
     init {
         mEditTodayDrugsView?.setPresenter(this)
     }
@@ -21,22 +23,33 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
     }
 
     override fun editPatientDrug(patientDrugRow: PatientDrugRow) {
-        RetrofitInstance.patientDrugService
-                .postPatientDrugCallendarRow(patientDrugRow.idPatientDrug,patientDrugRow.toCalendarRow())
-                .enqueue(object :Callback<Int>{
-                    override fun onFailure(call: Call<Int>?, t: Throwable?) {
-                        Log.d("ETDPresenter", "" + t.toString())
-                    }
-
-                    override fun onResponse(call: Call<Int>?, response: Response<Int>?) {
-                        response?.let {
-                            if(it.isSuccessful)
-                                it.body()?.let {
-                                    update(it,patientDrugRow)
-                                }
+        if (connectCounter<=0){
+            connectCounter = 3
+            RetrofitInstance.patientDrugService
+                    .postPatientDrugCallendarRow(patientDrugRow.idPatientDrug,patientDrugRow.toCalendarRow())
+                    .enqueue(object :Callback<Int>{
+                        override fun onFailure(call: Call<Int>?, t: Throwable?) {
+                            Log.d("ETDPresenter", "" + t.toString())
+                            connectCounter--
+                            if( connectCounter>0 && mEditTodayDrugsView!=null ){
+                                call?.clone()?.execute()
+                            } else {
+                                mEditTodayDrugsView?.showSnackBarError("Brak połączenia")
+                            }
                         }
-                    }
-                })
+
+                        override fun onResponse(call: Call<Int>?, response: Response<Int>?) {
+                            response?.let {
+                                if(it.isSuccessful)
+                                    it.body()?.let {
+                                        update(it,patientDrugRow)
+                                    }
+                                connectCounter=0
+                            }
+                        }
+                    })
+        }
+
     }
 
     override fun onViewDestroyed() {
@@ -73,6 +86,8 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
         patientDrugRowList.removeAt(replaceItemIndex)
         patientDrugRowList.add(replaceItemIndex,patientDrugRow)
         patientDrugRow.idRow=newRowId
+
+        mEditTodayDrugsView?.updatePatientDrugRow(patientDrugRow)
 
     }
 

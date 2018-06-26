@@ -27,8 +27,7 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
     }
 
     fun load(patientDrugRowList: List<PatientDrugRow>){
-        items.addAll(patientDrugRowList)
-        patientDrugRowList.sortedBy { it.drugName }
+        items.addAll(patientDrugRowList.sortedBy { it.drugName })
         notifyDataSetChanged()
     }
 
@@ -72,6 +71,7 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
                 value == 0 -> {
                     btn.isFocusable=false
                     btn.isClickable=false
+                    btn.isEnabled=false
                 }
                 isActive -> btn.setBackgroundResource(R.color.activeBtnTodayDrugs)
                 else -> btn.setBackgroundResource(R.color.inactiveBtnTodayDrugs)

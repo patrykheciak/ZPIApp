@@ -10,6 +10,7 @@ interface EditTodayDrugsContract {
         fun setPatientDrugsRow( patientDrugRow:List<PatientDrugRow> )
         fun updatePatientDrugRow( patientDrugRow: PatientDrugRow )
         fun showSnackBarMessage( message:String )
+        fun showSnackBarError(text: String)
     }
 
     interface Presenter:BasePresenter{

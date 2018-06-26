@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_today_drugs.*
 
 
 class EditTodayDrugsFragment : Fragment(),EditTodayDrugsContract.View {
+
+
     private lateinit var mPresenter: EditTodayDrugsContract.Presenter
     private lateinit var mPatientDrugRowAdapter: PatientDrugRowAdapter
 
@@ -49,6 +51,10 @@ class EditTodayDrugsFragment : Fragment(),EditTodayDrugsContract.View {
 
     override fun updatePatientDrugRow(patientDrugRow: PatientDrugRow) {
         mPatientDrugRowAdapter.update(patientDrugRow)
+    }
+
+    override fun showSnackBarError(text: String) {
+        Snackbar.make(todayDrugRV, text, Snackbar.LENGTH_LONG).show()
     }
 
 }
