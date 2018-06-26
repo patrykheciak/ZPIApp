@@ -35,13 +35,13 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
         val replaceItemIndex = items.indexOfFirst {
             it.idPatientDrug==patientDrugRow.idPatientDrug
         }
-        items.removeAt(replaceItemIndex)
-        items.add(replaceItemIndex,patientDrugRow)
-        notifyItemChanged(replaceItemIndex)
+        items[replaceItemIndex] = patientDrugRow
+        notifyDataSetChanged()
     }
 
     inner class PatientDrugVH(override val containerView: View):RecyclerView.ViewHolder(containerView),LayoutContainer {
         fun bind( patientDrugRow:PatientDrugRow ){
+            unlockBtn()
             todayDrugDrugName.text = patientDrugRow.drugName
             patientDrugRow.drugDose.let {
                 if (it.isEmpty())
@@ -60,9 +60,15 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
             setButton(todayDrugMiddayBtn,patientDrugRow.midday,patientDrugRow.hasMidday)
             setButton(todayDrugNightBtn,patientDrugRow.night,patientDrugRow.hasNight)
 
-            todayDrugMorningBtn.setOnClickListener{onButtonClick(patientDrugRow.copy().also { it.hasMorning=!it.hasMorning }) }
-            todayDrugMiddayBtn.setOnClickListener{onButtonClick(patientDrugRow.copy().also { it.hasMidday=!it.hasMidday }) }
-            todayDrugNightBtn.setOnClickListener{onButtonClick(patientDrugRow.copy().also { it.hasNight=!it.hasNight }) }
+            todayDrugMorningBtn.setOnClickListener{
+                lockBtn()
+                onButtonClick(patientDrugRow.copy().also { it.hasMorning=!it.hasMorning }) }
+            todayDrugMiddayBtn.setOnClickListener{
+                lockBtn()
+                onButtonClick(patientDrugRow.copy().also { it.hasMidday=!it.hasMidday }) }
+            todayDrugNightBtn.setOnClickListener{
+                lockBtn()
+                onButtonClick(patientDrugRow.copy().also { it.hasNight=!it.hasNight }) }
         }
 
         private fun setButton(btn:Button, value:Int, isActive:Boolean ) {
@@ -76,6 +82,14 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
                 isActive -> btn.setBackgroundResource(R.color.activeBtnTodayDrugs)
                 else -> btn.setBackgroundResource(R.color.inactiveBtnTodayDrugs)
             }
+        }
+
+        private fun lockBtn(){
+            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn).map { it.isEnabled = false }
+        }
+
+        private fun unlockBtn(){
+            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn).map { it.isEnabled = true }
         }
 
 
