@@ -14,7 +14,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.currnet_drugs_list_row.*
 
 
-class CurrentDrugsAdapter(val context:Context, var items:MutableList<PatientDrug> = mutableListOf() ): RecyclerView.Adapter<CurrentDrugsAdapter.CurrentDrugsVH>() {
+class CurrentDrugsAdapter(val context:Context, var items:MutableList<PatientDrug> = mutableListOf(),val onRemoveClick:(idPd:Int)->Unit ): RecyclerView.Adapter<CurrentDrugsAdapter.CurrentDrugsVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrentDrugsVH {
         val  v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.currnet_drugs_list_row,parent,false)
@@ -32,7 +32,7 @@ class CurrentDrugsAdapter(val context:Context, var items:MutableList<PatientDrug
 
     fun reloadDrugs( drugs:List<PatientDrug> ){
         items.clear()
-        items.addAll(drugs)
+        items.addAll(drugs.sortedBy { it.drugName })
         this.notifyDataSetChanged()
     }
 
@@ -43,6 +43,11 @@ class CurrentDrugsAdapter(val context:Context, var items:MutableList<PatientDrug
                 val intent = Intent(context,EditPatientDrugActivity::class.java)
                 intent.putExtra(EditPatientDrugActivity.EXTRA_PATIENT_DRUG,patientDrug)
                 context.startActivity(intent)
+            }
+            current_drug_row_remove_btn.setOnClickListener {
+                current_drug_row_remove_btn?.isEnabled=false
+                onRemoveClick(patientDrug.idPatientDrug)
+                current_drug_row_remove_btn?.isEnabled=true
             }
         }
     }

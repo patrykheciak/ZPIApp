@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_current_drugs -> {
                 if(::currentDrugsFragment.isInitialized.not()){
-                    currentDrugsFragment = CurrentDrugsFragment.newInstance(User.userId)
+                    currentDrugsFragment = CurrentDrugsFragment()
                     currentDrugsPresenter = CurrentDrugsPresenter(currentDrugsFragment)
                 }
                 replaceFragment(currentDrugsFragment)

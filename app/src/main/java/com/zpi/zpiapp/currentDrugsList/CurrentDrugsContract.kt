@@ -2,6 +2,7 @@ package com.zpi.zpiapp.currentDrugsList
 
 import com.zpi.zpiapp.BasePresenter
 import com.zpi.zpiapp.BaseView
+import com.zpi.zpiapp.model.Drug
 import com.zpi.zpiapp.model.Interaction
 import com.zpi.zpiapp.model.PatientDrug
 
@@ -12,8 +13,8 @@ interface CurrentDrugsContract {
     }
 
     interface Presenter : BasePresenter {
-        fun setUserId(userId:Int)
         fun loadDrugs()
+        fun deleteDrug( idPd:Int )
         fun onViewDestroyed()
     }
 }

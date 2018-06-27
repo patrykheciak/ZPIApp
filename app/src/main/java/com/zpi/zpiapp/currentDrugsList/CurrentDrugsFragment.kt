@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_current_drugs.*
 import kotlinx.android.synthetic.main.fragment_interactions.*
 
 class CurrentDrugsFragment : Fragment(),CurrentDrugsContract.View {
-    private var mUserId: Int = 0
     private lateinit var mPresenter: CurrentDrugsContract.Presenter
     private lateinit var mCurrentDrugsAdapter: CurrentDrugsAdapter
 
@@ -36,13 +35,6 @@ class CurrentDrugsFragment : Fragment(),CurrentDrugsContract.View {
         Snackbar.make(fragment_current_drugs_root,error, Snackbar.LENGTH_LONG).show()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mUserId = arguments.getInt(USER_ID)
-        }
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_current_drugs, container, false)
@@ -50,7 +42,7 @@ class CurrentDrugsFragment : Fragment(),CurrentDrugsContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mCurrentDrugsAdapter=CurrentDrugsAdapter(context)
+        mCurrentDrugsAdapter=CurrentDrugsAdapter(context,onRemoveClick = mPresenter::deleteDrug)
         fragment_current_drugs_recycler_view.adapter=mCurrentDrugsAdapter
         fragment_current_drugs_recycler_view.layoutManager= LinearLayoutManager(context)
 
@@ -61,19 +53,7 @@ class CurrentDrugsFragment : Fragment(),CurrentDrugsContract.View {
 
     override fun onResume() {
         super.onResume()
-        mPresenter.setUserId(mUserId)
         mPresenter.start()
-    }
-
-    companion object {
-        private val USER_ID = "user_id"
-        fun newInstance(userId: Int): CurrentDrugsFragment {
-            val fragment = CurrentDrugsFragment()
-            val args = Bundle()
-            args.putInt(USER_ID, userId)
-            fragment.arguments = args
-            return fragment
-        }
     }
 
 }

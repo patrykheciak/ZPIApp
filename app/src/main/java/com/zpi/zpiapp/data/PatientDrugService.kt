@@ -28,4 +28,7 @@ interface PatientDrugService {
 
     @POST("api/PatientDrug/drugCallendarRow/{idPd}")
     fun postPatientDrugCallendarRow( @Path("idPd")idPd:Int,@Body patientDrugRow:CalendarRow):Call<Int>
+
+    @DELETE("api/PatientDrug/{idPd}")
+    fun removePatientDrug( @Path("idPd")idPd:Int ):Call<ResponseBody>
 }
