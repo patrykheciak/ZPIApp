@@ -213,7 +213,7 @@ class EditPatientDrugFragment : Fragment(), EditPatientDrugContract.View {
 
 
     override fun close() {
-
+        mEditPatientDrugFragmentListener?.close()
     }
 
     interface EditPatientDrugFragmentListener {
