@@ -1,7 +1,9 @@
 package com.zpi.zpiapp.login
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -103,6 +105,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+        moveTaskToBack(true)
+    }
+
     // =========================  from now on impl of LoginContract.View  =========================
 
     override fun setPresenter(presenter: LoginContract.Presenter) {
@@ -202,5 +209,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private fun shakeView(view: View) {
         val shake = AnimationUtils.loadAnimation(this, R.anim.shake)
         view.startAnimation(shake)
+    }
+
+    override fun showApiError(errorMessage: String) {
+        Snackbar.make(cardView, errorMessage, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun finishActivity() {
+        finish()
     }
 }

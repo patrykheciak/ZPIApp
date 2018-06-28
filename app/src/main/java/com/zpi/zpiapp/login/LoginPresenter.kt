@@ -1,6 +1,14 @@
 package com.zpi.zpiapp.login
 
 import android.text.TextUtils
+import android.util.Log
+import com.zpi.zpiapp.model.Drug
+import com.zpi.zpiapp.utlis.RetrofitInstance
+import com.zpi.zpiapp.utlis.User
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
@@ -74,9 +82,44 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
                 }
                 LoginType.SIGN_IN -> {
 
+                    loguj(login, password)
                 }
             }
         }
+    }
+
+    private fun loguj(login: String, password: String) {
+        RetrofitInstance.userService
+                .loginPerson(login, password).enqueue(object : Callback<ResponseBody>{
+                    override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                        Log.d("LoginPresenter", "" + t.toString())
+                            call?.clone()?.enqueue(this)
+                    }
+
+                    override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                        Log.d("LoginPresenter", response?.body().toString())
+                        if (response != null) {
+                            if (response.isSuccessful) {
+                                val body = response.body()
+                                body?.let {
+                                    val responseString = body.string()
+                                    try {
+                                        val personId = Integer.parseInt(responseString)
+                                        User.userId = personId
+                                        mView.finishActivity()
+                                    } catch (e : NumberFormatException){
+                                        // returned string does not contain personId, so login failed
+                                        Log.d("LoginPresenter", "zle pasy " + responseString)
+                                        mView.showProgress(false)
+                                        mView.showApiError(responseString)
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                })
     }
 
     private fun isEmailValid(target: CharSequence): Boolean {

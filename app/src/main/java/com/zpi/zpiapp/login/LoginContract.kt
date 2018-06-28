@@ -18,6 +18,8 @@ interface LoginContract {
         fun errorPasswordToShort(passwordMinLength: Int)
         fun clearFocus()
         fun showProgress(showProgress: Boolean)
+        fun showApiError(errorMessage: String)
+        fun finishActivity()
     }
 
     interface Presenter : BasePresenter {
