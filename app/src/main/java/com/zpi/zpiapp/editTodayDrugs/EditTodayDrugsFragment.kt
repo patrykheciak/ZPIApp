@@ -54,6 +54,11 @@ class EditTodayDrugsFragment : Fragment(),EditTodayDrugsContract.View {
         mPresenter.start()
     }
 
+    override fun onPause() {
+        super.onPause()
+        mPresenter.onViewPause()
+    }
+
     override fun updatePatientDrugRow(patientDrugRow: PatientDrugRow) {
         mPatientDrugRowAdapter.update(patientDrugRow)
     }

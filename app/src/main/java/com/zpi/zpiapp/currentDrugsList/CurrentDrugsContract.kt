@@ -15,6 +15,6 @@ interface CurrentDrugsContract {
     interface Presenter : BasePresenter {
         fun loadDrugs()
         fun deleteDrug( idPd:Int )
-        fun onViewDestroyed()
+        fun onViewPause()
     }
 }

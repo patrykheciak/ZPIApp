@@ -27,6 +27,7 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
     }
 
     fun load(patientDrugRowList: List<PatientDrugRow>){
+        items.clear()
         items.addAll(patientDrugRowList.sortedBy { it.drugName })
         notifyDataSetChanged()
     }

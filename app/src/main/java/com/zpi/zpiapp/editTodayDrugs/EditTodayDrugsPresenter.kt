@@ -11,7 +11,7 @@ import retrofit2.Response
 class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.View?):EditTodayDrugsContract.Presenter{
 
     val patientDrugRowList:MutableList<PatientDrugRow> = mutableListOf()
-
+    var mPause = true
     var connectCounter = 0
 
     init {
@@ -19,7 +19,9 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
     }
 
     override fun start() {
+        mPause=false
         loadDrugRow()
+
     }
 
     override fun editPatientDrug(patientDrugRow: PatientDrugRow) {
@@ -31,7 +33,7 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
                         override fun onFailure(call: Call<Int>?, t: Throwable?) {
                             Log.d("ETDPresenter", "" + t.toString())
                             connectCounter--
-                            if( connectCounter>0 && mEditTodayDrugsView!=null ){
+                            if( connectCounter>0 && mEditTodayDrugsView!=null && mPause.not() ){
                                 call?.clone()?.execute()
                             } else {
                                 mEditTodayDrugsView?.showSnackBarError("Brak połączenia")
@@ -52,20 +54,20 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
 
     }
 
-    override fun onViewDestroyed() {
-        mEditTodayDrugsView=null
+    override fun onViewPause() {
+        mPause=true
     }
 
 
 
     fun loadDrugRow() {
-        patientDrugRowList.clear()
         RetrofitInstance.patientDrugService
                 .currentPatientsDrugs(userId)
                 .enqueue(object : Callback<List<PatientDrug>> {
                     override fun onResponse(call: Call<List<PatientDrug>>?, response: Response<List<PatientDrug>>?) {
                         response?.let {
                             it.body()?.let {
+                                patientDrugRowList.clear()
                                 patientDrugRowList.addAll(it.map { PatientDrugRow.create(it) })
                             }
                         }
@@ -73,7 +75,7 @@ class EditTodayDrugsPresenter( var mEditTodayDrugsView:EditTodayDrugsContract.Vi
                     }
                     override fun onFailure(call: Call<List<PatientDrug>>?, t: Throwable?) {
                         mEditTodayDrugsView?.showSnackBarMessage(t.toString())
-                        if (mEditTodayDrugsView!=null)
+                        if (mEditTodayDrugsView!=null && mPause.not())
                             call?.clone()?.enqueue(this)
                     }
                 } )

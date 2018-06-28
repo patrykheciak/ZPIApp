@@ -15,7 +15,7 @@ interface EditTodayDrugsContract {
 
     interface Presenter:BasePresenter{
         fun editPatientDrug( patientDrugRow:PatientDrugRow )
-        fun onViewDestroyed()
+        fun onViewPause()
     }
 
 }

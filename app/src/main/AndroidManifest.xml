@@ -32,6 +32,11 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".editPrivateData.EditPrivateDataActivity"
+            android:label="Konto"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".editPatientDrug.EditPatientDrugActivity"
             android:label="Dodaj lek"
             android:parentActivityName=".MainActivity"

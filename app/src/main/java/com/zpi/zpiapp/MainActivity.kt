@@ -12,6 +12,7 @@ import com.zpi.zpiapp.currentDrugsList.CurrentDrugsFragment
 import com.zpi.zpiapp.currentDrugsList.CurrentDrugsPresenter
 import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
 import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
+import com.zpi.zpiapp.editPrivateData.EditPrivateDataActivity
 import com.zpi.zpiapp.editTodayDrugs.EditTodayDrugsFragment
 import com.zpi.zpiapp.editTodayDrugs.EditTodayDrugsPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
@@ -98,10 +99,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.title=="Opiekunowie")
+        if(item?.itemId==R.id.careAssistantMenuId)
             startActivity(Intent(this,CareAssistantsActivity::class.java))
-        if(item?.title=="Lekarze")
+        if(item?.itemId==R.id.physicianMenuId)
             startActivity(Intent(this,PhysiciansActivity::class.java))
+        if(item?.itemId==R.id.accountMenuId)
+            startActivity(Intent(this,EditPrivateDataActivity::class.java))
         return true
     }
 }

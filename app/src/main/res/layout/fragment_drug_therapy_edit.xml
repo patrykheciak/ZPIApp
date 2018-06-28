@@ -35,16 +35,16 @@
 
     <Button
         android:id="@+id/drugTherapyOkButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:text="Dodaj"
+        android:text="Ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
@@ -110,6 +110,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
+        android:lines="3"
+        android:maxLines="5"
         app:layout_constraintBottom_toBottomOf="@+id/drugTherapyEveningDoseTI"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline5"
@@ -180,6 +182,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Rano"
+            android:singleLine="true"
+            android:maxLength="4"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
@@ -198,6 +202,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Południe"
+            android:singleLine="true"
+            android:maxLength="4"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
@@ -216,6 +222,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wieczór"
+            android:singleLine="true"
+            android:maxLength="4"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 

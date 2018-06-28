@@ -10,17 +10,21 @@ import retrofit2.Response
 
 class CurrentDrugsPresenter(private var currentDrugsView:CurrentDrugsContract.View?):CurrentDrugsContract.Presenter{
     private val currentDrugsList:MutableList<PatientDrug> = mutableListOf()
+    private var mPause = true
 
-    override fun onViewDestroyed() {
-        currentDrugsView= null
-    }
+
 
     init {
         currentDrugsView?.setPresenter(this)
     }
 
     override fun start() {
+        mPause=false
         loadDrugs()
+    }
+
+    override fun onViewPause() {
+        mPause=true
     }
 
     override fun loadDrugs() {
@@ -31,6 +35,7 @@ class CurrentDrugsPresenter(private var currentDrugsView:CurrentDrugsContract.Vi
                     override fun onResponse(call: Call<List<PatientDrug>>?, response: Response<List<PatientDrug>>?) {
                         response?.let {
                             it.body()?.let {
+                                currentDrugsList.clear()
                                 currentDrugsList.addAll(it)
                             }
                         }
@@ -39,7 +44,7 @@ class CurrentDrugsPresenter(private var currentDrugsView:CurrentDrugsContract.Vi
 
                     override fun onFailure(call: Call<List<PatientDrug>>?, t: Throwable?) {
                         currentDrugsView?.showSnackBarError(t.toString())
-                        if(currentDrugsView!=null)
+                        if(currentDrugsView!=null && mPause.not())
                             call?.clone()?.enqueue(this)
                     }
                 } )

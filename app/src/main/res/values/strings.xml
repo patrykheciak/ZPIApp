@@ -54,5 +54,8 @@
     <string name="title_current_drugs">Leki</string>
 
     <string name="annotation">Adnotacja</string>
+    <string name="CareAssistantMenuText">Opiekunowie</string>
+    <string name="PhysiciansMenuText">Lekarze</string>
+    <string name="AccountMenuText">Konto</string>
 
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Opiekunowie" />
-    <item android:title="Lekarze" />
+    <item android:id="@+id/careAssistantMenuId" android:title="@string/CareAssistantMenuText" />
+    <item android:id="@+id/physicianMenuId" android:title="@string/PhysiciansMenuText" />
+    <item android:id="@+id/accountMenuId" android:title="@string/AccountMenuText"/>
 </menu>

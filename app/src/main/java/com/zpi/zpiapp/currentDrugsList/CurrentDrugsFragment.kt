@@ -56,4 +56,9 @@ class CurrentDrugsFragment : Fragment(),CurrentDrugsContract.View {
         mPresenter.start()
     }
 
+    override fun onPause() {
+        super.onPause()
+        mPresenter.onViewPause()
+    }
+
 }
