@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.zpi.zpiapp.R
 import com.zpi.zpiapp.model.PatientDrug
 import com.zpi.zpiapp.utlis.RetrofitInstance
+import com.zpi.zpiapp.utlis.User
 import kotlinx.android.synthetic.main.fragment_screen_slide_page.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,7 +47,7 @@ class ScreenSlidePageFragment : Fragment() {
         RetrofitInstance
                 .patientDrugService
                 .patientsDrugsInDay(
-                        2,
+                        User.userId,
                         "${c.get(Calendar.YEAR)}-${c.get(Calendar.MONTH) + 1}-${c.get(Calendar.DAY_OF_MONTH)}")
                 .enqueue(object : Callback<List<PatientDrug>> {
 
