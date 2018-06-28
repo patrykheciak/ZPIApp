@@ -16,7 +16,9 @@
             android:id="@+id/todayDrugDrugName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@+id/todayDrugAnnotationBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nazwa leku" />
@@ -25,8 +27,10 @@
             android:id="@+id/todayDrugDrugDose"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintEnd_toStartOf="@+id/todayDrugAnnotationBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/todayDrugDrugName"
             tools:text="Dawka leku" />
@@ -35,14 +39,14 @@
             android:id="@+id/todayDrugPatientDrugAnnotation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/todayDrugAnnotationBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/todayDrugDrugDose"
-            tools:text="Zapij mlekiem"
 
-            />
+            app:layout_constraintTop_toBottomOf="@id/todayDrugDrugDose"
+            tools:text="Zapij mlekiem" />
 
         <android.support.constraint.Guideline
             android:id="@+id/todayDrugGuideline1"
@@ -132,6 +136,19 @@
             app:layout_constraintStart_toStartOf="@id/todayDrugGuideline2"
             app:layout_constraintTop_toBottomOf="@id/todayDrugNightTV"
             tools:text="0" />
+
+        <ImageButton
+            android:id="@+id/todayDrugAnnotationBtn"
+            style="@android:style/Widget.Material.ImageButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/bpTransparent"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_library_books_black_24dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

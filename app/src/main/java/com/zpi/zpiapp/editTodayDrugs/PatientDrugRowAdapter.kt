@@ -11,7 +11,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.today_drugs_row.*
 
 
-class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableListOf(),val onButtonClick:(PatientDrugRow)->Unit):RecyclerView.Adapter<PatientDrugRowAdapter.PatientDrugVH>() {
+class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableListOf(),val onTakeButtonClick:(PatientDrugRow)->Unit,val onAnnotationButtonClick:(PatientDrugRow)->Unit):RecyclerView.Adapter<PatientDrugRowAdapter.PatientDrugVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientDrugVH {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.today_drugs_row,parent,false)
@@ -62,13 +62,17 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
 
             todayDrugMorningBtn.setOnClickListener{
                 lockBtn()
-                onButtonClick(patientDrugRow.copy().also { it.hasMorning=!it.hasMorning }) }
+                onTakeButtonClick(patientDrugRow.copy().also { it.hasMorning=!it.hasMorning }) }
             todayDrugMiddayBtn.setOnClickListener{
                 lockBtn()
-                onButtonClick(patientDrugRow.copy().also { it.hasMidday=!it.hasMidday }) }
+                onTakeButtonClick(patientDrugRow.copy().also { it.hasMidday=!it.hasMidday }) }
             todayDrugNightBtn.setOnClickListener{
                 lockBtn()
-                onButtonClick(patientDrugRow.copy().also { it.hasNight=!it.hasNight }) }
+                onTakeButtonClick(patientDrugRow.copy().also { it.hasNight=!it.hasNight }) }
+
+            todayDrugAnnotationBtn.setOnClickListener {
+                onAnnotationButtonClick(patientDrugRow)
+            }
         }
 
         private fun setButton(btn:Button, value:Int, isActive:Boolean ) {
@@ -85,11 +89,13 @@ class PatientDrugRowAdapter(val items: MutableList<PatientDrugRow> = mutableList
         }
 
         private fun lockBtn(){
-            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn).map { it.isEnabled = false }
+            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn,todayDrugAnnotationBtn)
+                    .map { it.isEnabled = false }
         }
 
         private fun unlockBtn(){
-            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn).map { it.isEnabled = true }
+            listOf(todayDrugMorningBtn,todayDrugMiddayBtn,todayDrugNightBtn,todayDrugAnnotationBtn)
+                    .map { it.isEnabled = true }
         }
 
 

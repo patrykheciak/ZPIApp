@@ -53,4 +53,6 @@
     <string name="title_drug_history">Historia zażywania</string>
     <string name="title_current_drugs">Leki</string>
 
+    <string name="annotation">Adnotacja</string>
+
 </resources>

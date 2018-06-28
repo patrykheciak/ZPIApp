@@ -26,7 +26,7 @@ class CurrentDrugsPresenter(private var currentDrugsView:CurrentDrugsContract.Vi
     override fun loadDrugs() {
         currentDrugsList.clear()
         RetrofitInstance.patientDrugService
-                .currentPatientsDrugs(User.userId)
+                .editablePatientsDrugs(User.userId)
                 .enqueue(object : Callback<List<PatientDrug>> {
                     override fun onResponse(call: Call<List<PatientDrug>>?, response: Response<List<PatientDrug>>?) {
                         response?.let {

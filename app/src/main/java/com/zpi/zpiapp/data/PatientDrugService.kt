@@ -14,6 +14,9 @@ interface PatientDrugService {
     @GET("api/patientdrug/currentDrugs/{patientId}")
     fun currentPatientsDrugs(@Path("patientId") patientId: Int): Call<List<PatientDrug>>
 
+    @GET("api/patientdrug/editableDrugs/{patientId}")
+    fun editablePatientsDrugs(@Path("patientId") patientId: Int): Call<List<PatientDrug>>
+
     @GET("api/patientdrug/drugsByDate/{patientId}/{day}")
     fun patientsDrugsInDay(
             @Path("patientId") patientId: Int,
