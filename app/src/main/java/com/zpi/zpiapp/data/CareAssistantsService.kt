@@ -1,6 +1,7 @@
 package com.zpi.zpiapp.data
 
 import com.zpi.zpiapp.model.CareAssistant
+import com.zpi.zpiapp.model.PatientDTO
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.DELETE
@@ -10,7 +11,7 @@ import retrofit2.http.Path
 
 interface CareAssistantsService{
 
-    @GET("$route/PatientCareAssistant/{userId}")
+    @GET("$route/careassistants/{userId}")
     fun patientCareAssistants(@Path("userId") userId: Int): Call<List<CareAssistant>>
 
     @POST("$route/add/{userId}/{login}")
@@ -20,6 +21,9 @@ interface CareAssistantsService{
     @DELETE("$route/remove/{userId}/{caId}")
     fun removeCareAssistant(@Path("userId") userId: Int,
                             @Path("caId") careAssistantId:Int):Call<ResponseBody>
+
+    @GET("$route/patients/{caId}")
+    fun getCharges(@Path("caId") careAssistantId:Int ):Call<List<PatientDTO>>
 
     companion object {
         const val route = "api/PatientCareAssistant"

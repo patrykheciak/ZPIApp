@@ -78,13 +78,12 @@ class CareAssistantsFragment : Fragment(),CareAssistantsContract.View {
                 mPresenter.checkRemovingCareAssistants(careAssistantId)
             }
         })
+
         care_assistants_found_recycler_view.adapter = mCareAssistantsAdapter
         care_assistants_found_recycler_view.layoutManager=LinearLayoutManager(context)
 
         care_assistants_add_panel_fab.setOnClickListener {
             hideKeyboard()
-
-            //zmiana
             mPresenter.addNewCareAssistant(care_assistants_add_panel_login.text.toString() )
         }
     }

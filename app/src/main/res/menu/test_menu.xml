@@ -3,4 +3,5 @@
     <item android:id="@+id/careAssistantMenuId" android:title="@string/CareAssistantMenuText" />
     <item android:id="@+id/physicianMenuId" android:title="@string/PhysiciansMenuText" />
     <item android:id="@+id/accountMenuId" android:title="@string/AccountMenuText"/>
+    <item android:id="@+id/chargesMenuId" android:title="Opieka"/>
 </menu>
