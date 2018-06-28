@@ -5,6 +5,7 @@ import android.util.SparseArray
 import com.codetroopers.betterpickers.calendardatepicker.MonthAdapter
 import com.zpi.zpiapp.model.PatientDrug
 import com.zpi.zpiapp.utlis.RetrofitInstance
+import com.zpi.zpiapp.utlis.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +25,7 @@ class DrugHistoryPresenter(val mDrugHistoryView: DrugHistoryContract.View) : Dru
     override fun start() {
         RetrofitInstance
                 .patientDrugService
-                .allPatientsDrugs(2)
+                .allPatientsDrugs(User.userId)
                 .enqueue(object : Callback<List<PatientDrug>> {
 
                     override fun onFailure(call: Call<List<PatientDrug>>?, t: Throwable?) {
@@ -52,8 +53,8 @@ class DrugHistoryPresenter(val mDrugHistoryView: DrugHistoryContract.View) : Dru
         val dateString = df.format(date.time)
         mDrugHistoryView.setButtonText(dateString)
 
-        for (i in 0 until days.size){
-            if (isSameDay(days[i], date.time)){
+        for (i in 0 until days.size) {
+            if (isSameDay(days[i], date.time)) {
                 mDrugHistoryView.setAdapterPage(i)
             }
         }
@@ -72,13 +73,17 @@ class DrugHistoryPresenter(val mDrugHistoryView: DrugHistoryContract.View) : Dru
         days.clear()
         days.addAll(enabledDisabledDays.first)
 
-        mDrugHistoryView.setDates(days)
-        mDrugHistoryView.setDatesForSpinner(start, end, disabledDaysSparseArray)
+        if (enabledDisabledDays.first.isNotEmpty()) {
 
-        val df = SimpleDateFormat("dd MMMM yyyy")
-        val date = df.format(days.last())
-        mDrugHistoryView.setButtonText(date)
-        mDrugHistoryView.setAdapterPage(days.size-1)
+            mDrugHistoryView.setDates(days)
+            mDrugHistoryView.setDatesForSpinner(start, end, disabledDaysSparseArray)
+
+            val df = SimpleDateFormat("dd MMMM yyyy")
+            val date = df.format(days.last())
+            mDrugHistoryView.setButtonText(date)
+            mDrugHistoryView.setAdapterPage(days.size - 1)
+        }
+
     }
 
     private fun dayListToSparseArray(days: List<Date>): SparseArray<MonthAdapter.CalendarDay> {
