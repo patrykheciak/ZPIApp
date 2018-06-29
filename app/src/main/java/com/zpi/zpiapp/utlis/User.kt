@@ -5,4 +5,5 @@ package com.zpi.zpiapp.utlis
  */
 object User {
     var userId:Int = 1
+    var userType:Int = 1
 }

@@ -60,5 +60,7 @@
     <string name="care_assistant_chargesNotFoundText">Nie znaleziono podopiecznych</string>
     <string name="care_assistant_chargesConnectionProblemText">Problem z połączeniem</string>
     <string name="newChatgesLoginEditTextHint">Login podopiecznego</string>
+    <string name="title_activity_care_asstistant_perspective">CareAsstistantPerspectiveActivity
+    </string>
 
 </resources>

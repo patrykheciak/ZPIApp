@@ -13,7 +13,7 @@ interface UserService {
     fun loginPerson(
             @Path("login") login: String,
             @Path("password") password: String
-    ): Call<ResponseBody>
+    ): Call<IntArray>
 
     @GET( "$route/userData/{id}" )
     fun getUserData( @Path( "id" ) userId:Int ): Call<UserDTO>
