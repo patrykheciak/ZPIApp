@@ -49,8 +49,11 @@
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/title_activity_login"
-
             android:theme="@style/AppThemeTranslucentStatusBar">
+        </activity>
+        <activity
+            android:name=".careAssistantPerspective.CareAsstistantPerspectiveActivity"
+            android:label="Monitorowanie podopiecznych">
         </activity>
     </application>
 

@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.zpi.zpiapp.R
+import com.zpi.zpiapp.careAssistantPerspective.CareAsstistantPerspectiveActivity
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -241,7 +242,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun launchAssistantActivity() {
-        val intent = Intent(this, CareAssistantsActivity::class.java)
+        val intent = Intent(this, CareAsstistantPerspectiveActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

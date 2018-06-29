@@ -57,5 +57,7 @@
     <string name="CareAssistantMenuText">Opiekunowie</string>
     <string name="PhysiciansMenuText">Lekarze</string>
     <string name="AccountMenuText">Konto</string>
+    <string name="title_activity_care_asstistant_perspective">CareAsstistantPerspectiveActivity
+    </string>
 
 </resources>
