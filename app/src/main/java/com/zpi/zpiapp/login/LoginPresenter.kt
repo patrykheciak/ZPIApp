@@ -72,13 +72,13 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
             mView.errorLoginToShort(LOGIN_MIN_LENGTH)
         }
 
-        if (errorOcured.not()){
+        if (errorOcured.not()) {
             mView.hideKeyboard()
             mView.clearFocus()
 
             // TODO wszystkie pola sa ok. Tutaj trzeba logowac/rejestrowac
             mView.showProgress(true)
-            when (loginType){
+            when (loginType) {
                 LoginType.SIGN_UP -> {
 
                 }
@@ -91,39 +91,43 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
     }
 
     override fun setLoginLoadedFromPrefs(id: Int, userType: Int) {
-        if (id > 0){
+        if (id > 0) {
             User.userId = id
+            User.userType = userType
             mView.finishActivity()
         }
     }
 
     private fun loguj(login: String, password: String) {
         RetrofitInstance.userService
-                .loginPerson(login, password).enqueue(object : Callback<ResponseBody>{
-                    override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                .loginPerson(login, password).enqueue(object : Callback<IntArray> {
+                    override fun onFailure(call: Call<IntArray>?, t: Throwable?) {
                         Log.d("LoginPresenter", "" + t.toString())
-                            call?.clone()?.enqueue(this)
+                        call?.clone()?.enqueue(this)
                     }
 
-                    override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
+                    override fun onResponse(call: Call<IntArray>?, response: Response<IntArray>?) {
                         Log.d("LoginPresenter", response?.body().toString())
                         if (response != null) {
                             if (response.isSuccessful) {
                                 val body = response.body()
                                 body?.let {
-                                    val responseString = body.string()
-                                    try {
-                                        val personId = Integer.parseInt(responseString)
-                                        User.userId = personId
-                                        mView.storeLoginInPrefs(personId, 1)
-                                        mView.finishActivity()
-                                    } catch (e : NumberFormatException){
-                                        // returned string does not contain personId, so login failed
-                                        Log.d("LoginPresenter", "zle pasy " + responseString)
-                                        mView.showProgress(false)
-                                        mView.showApiError(responseString)
-                                    }
+                                    mView.showApiError("${body[0]} ${body[1]}")
 
+                                    val id = body[0]
+                                    val userType = body[1]
+
+                                    if (id > 0){
+                                        // successfully logged in
+                                        User.userId = id
+                                        User.userType = userType
+                                        mView.storeLoginInPrefs(id, userType)
+                                        mView.finishActivity()
+                                    } else {
+                                        // login failed
+                                        mView.showProgress(false)
+                                        mView.showApiError("Nie ma takiego użytkownika")
+                                    }
                                 }
                             }
                         }
