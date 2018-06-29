@@ -1,14 +1,10 @@
 package com.zpi.zpiapp.utlis
 
-import com.zpi.zpiapp.data.CareAssistantsService
-import com.zpi.zpiapp.data.InteractionsService
-import com.zpi.zpiapp.data.PatientDrugService
-import com.zpi.zpiapp.data.PhysiciansService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.GsonBuilder
 import com.google.gson.Gson
-
+import com.zpi.zpiapp.data.*
 
 
 //http://localhost:49822/
@@ -30,5 +26,6 @@ object RetrofitInstance {
     val physiciansService = retrofit.create(PhysiciansService::class.java)!!
     val interactionsService = retrofit.create(InteractionsService::class.java)!!
     val patientDrugService = retrofit.create(PatientDrugService::class.java)!!
+    val userService = retrofit.create(UserService::class.java)!!
 
 }

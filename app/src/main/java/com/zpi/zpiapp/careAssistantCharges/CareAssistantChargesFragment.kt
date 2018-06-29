@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zpi.zpiapp.R
-import com.zpi.zpiapp.careAssistants.CareAssistantsAdapter
 import com.zpi.zpiapp.model.PatientDTO
 import kotlinx.android.synthetic.main.fragment_care_assistants.*
 import kotlinx.android.synthetic.main.fragment_care_assistants_charges.*
