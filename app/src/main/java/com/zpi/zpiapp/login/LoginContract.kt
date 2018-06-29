@@ -20,11 +20,16 @@ interface LoginContract {
         fun showProgress(showProgress: Boolean)
         fun showApiError(errorMessage: String)
         fun finishActivity()
+
+        fun storeLoginInPrefs(id: Int, userType: Int)
+        fun loadLoginFromPrefs()
     }
 
     interface Presenter : BasePresenter {
         fun signUpFormRequested()
         fun signInFormRequested()
         fun attemptSignUpSignIn(login: String, email: String, password: String)
+
+        fun setLoginLoadedFromPrefs(id: Int, userType: Int)
     }
 }

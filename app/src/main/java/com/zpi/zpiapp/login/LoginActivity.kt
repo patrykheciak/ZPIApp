@@ -26,6 +26,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         const val KEY_LOGIN_TEXT = "KEY_LOGIN_TEXT"
         const val KEY_EMAIL_TEXT = "KEY_EMAIL_TEXT"
         const val KEY_PASSWORD_TEXT = "KEY_PASSWORD_TEXT"
+
+        const val KEY_PREFS_ID = "KEY_PREFS_ID"
+        const val KEY_PREFS_USER_TYPE = "KEY_PREFS_USER_TYPE"
     }
 
     // =============================  from now on Android callbacks  =============================
@@ -60,6 +63,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             }
             false
         })
+        presenter.start()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -217,5 +221,19 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun finishActivity() {
         finish()
+    }
+
+    override fun storeLoginInPrefs(id: Int, userType: Int){
+        getPreferences(Context.MODE_PRIVATE).edit()
+                .putInt(KEY_PREFS_ID,id)
+                .putInt(KEY_PREFS_USER_TYPE, userType)
+                .apply()
+    }
+
+    override fun loadLoginFromPrefs() {
+        val prefs = getPreferences(Context.MODE_PRIVATE)
+        val id = prefs.getInt(KEY_PREFS_ID, -1)
+        val userType = prefs.getInt(KEY_PREFS_USER_TYPE, -1)
+        presenter.setLoginLoadedFromPrefs(id, userType)
     }
 }

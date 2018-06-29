@@ -12,6 +12,8 @@ import retrofit2.Response
 
 
 class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
+
+
     var loginType = LoginType.SIGN_UP
 
     init {
@@ -19,7 +21,7 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
     }
 
     override fun start() {
-
+        mView.loadLoginFromPrefs()
     }
 
     override fun signUpFormRequested() {
@@ -88,6 +90,13 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
         }
     }
 
+    override fun setLoginLoadedFromPrefs(id: Int, userType: Int) {
+        if (id > 0){
+            User.userId = id
+            mView.finishActivity()
+        }
+    }
+
     private fun loguj(login: String, password: String) {
         RetrofitInstance.userService
                 .loginPerson(login, password).enqueue(object : Callback<ResponseBody>{
@@ -106,6 +115,7 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
                                     try {
                                         val personId = Integer.parseInt(responseString)
                                         User.userId = personId
+                                        mView.storeLoginInPrefs(personId, 1)
                                         mView.finishActivity()
                                     } catch (e : NumberFormatException){
                                         // returned string does not contain personId, so login failed
