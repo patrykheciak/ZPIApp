@@ -10,11 +10,11 @@ interface PhysiciansService {
     @GET("$route/physicians/{userId}")
     fun patientPhysicians(@Path("userId") userId: Int): Call<List<Physician>>
 
-    @PUT("$route/add/{userId}/{pwzNumber}")
+    @POST("$route/add/{userId}/{pwzNumber}")
     fun addPhysician(@Path("userId") userId: Int,
                          @Path("pwzNumber") pwzNumber: String): Call<ResponseBody>
 
-    @PUT("$route/remove/{userId}/{psId}")
+    @DELETE("$route/remove/{userId}/{psId}")
     fun removePhysician(@Path("userId") userId: Int,
                             @Path("psId") physicianId:Int): Call<ResponseBody>
 
