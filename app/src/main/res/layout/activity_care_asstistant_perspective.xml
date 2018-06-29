@@ -8,33 +8,42 @@
     tools:context=".careAssistantPerspective.CareAsstistantPerspectiveActivity">
 
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/bpWhite">
+
+        <TextView
+            android:id="@+id/info_patient_selection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:text="Wybierz pacjenta"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fragment_history_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"/>
+        app:layout_constraintTop_toBottomOf="@+id/topbar"/>
 
     <RelativeLayout
         android:id="@+id/splash_no_patients"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
         android:background="@color/bpWhite"
+        android:gravity="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +52,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nie masz żadnych pacjentów"
             android:gravity="center"
+            android:text="Nie masz żadnych pacjentów"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
