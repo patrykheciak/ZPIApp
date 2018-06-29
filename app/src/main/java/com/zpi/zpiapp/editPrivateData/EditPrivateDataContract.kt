@@ -2,11 +2,11 @@ package com.zpi.zpiapp.editPrivateData
 
 import com.zpi.zpiapp.BasePresenter
 import com.zpi.zpiapp.BaseView
-import com.zpi.zpiapp.model.User
+import com.zpi.zpiapp.model.UserDTO
 
 interface EditPrivateDataContract{
     interface View:BaseView<Presenter>{
-        fun loadData( user: User)
+        fun loadData(userDTO: UserDTO)
         fun showSnackBarError(error: String)
     }
 

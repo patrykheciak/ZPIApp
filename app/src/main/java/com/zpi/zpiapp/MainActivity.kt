@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.zpi.zpiapp.careAssistantCharges.CareAssistantChargesActivity
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.currentDrugsList.CurrentDrugsFragment
 import com.zpi.zpiapp.currentDrugsList.CurrentDrugsPresenter
@@ -106,6 +107,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,PhysiciansActivity::class.java))
         if(item?.itemId==R.id.accountMenuId)
             startActivity(Intent(this,EditPrivateDataActivity::class.java))
+        if (item?.itemId==R.id.chargesMenuId)
+            startActivity(Intent( this,CareAssistantChargesActivity::class.java ))
         return true
     }
 }

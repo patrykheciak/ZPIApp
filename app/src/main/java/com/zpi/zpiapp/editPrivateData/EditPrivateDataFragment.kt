@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.zpi.zpiapp.R
-import com.zpi.zpiapp.model.User
-import kotlinx.android.synthetic.main.fragment_drug_therapy_edit.*
+import com.zpi.zpiapp.model.UserDTO
 import kotlinx.android.synthetic.main.fragment_private_data.*
 
 class EditPrivateDataFragment:Fragment(),EditPrivateDataContract.View{
@@ -22,6 +21,9 @@ class EditPrivateDataFragment:Fragment(),EditPrivateDataContract.View{
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        privateDataOkBtn.isEnabled=false
+        privateDataOkBtn.text="ladowanie"
 
         privateDataOkBtn.setOnClickListener {
             hideKeyboard()
@@ -49,10 +51,12 @@ class EditPrivateDataFragment:Fragment(),EditPrivateDataContract.View{
         }
     }
 
-    override fun loadData(user: User) {
-        privateDataNameET.setText(user.Name)
-        privateDataSurnameET.setText(user.Surname)
-        privateDataIsActiveCB.isChecked=user.isActive
+    override fun loadData(userDTO: UserDTO) {
+        privateDataOkBtn.isEnabled=true
+        privateDataOkBtn.text="Aktualizuj"
+        privateDataNameET.setText(userDTO.name)
+        privateDataSurnameET.setText(userDTO.surname)
+        privateDataIsActiveCB.isChecked=userDTO.isActive?:false
     }
 
     override fun showSnackBarError(error: String) {

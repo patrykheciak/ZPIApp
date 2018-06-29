@@ -15,7 +15,7 @@
         android:elevation="4dp"
         android:translationZ="2dp">
 
-        <!--When user clicks interact FAB, focus gets removed from drug1 and drug2. However
+        <!--WuserDTOuser clicks interact FAB, focus gets removed from drug1 and drug2. However
         the first focusable view declared gets the focus anyway. In this case it drug1 would
         get focus. This is why I'm introducing focus_thief.-->
         <View
