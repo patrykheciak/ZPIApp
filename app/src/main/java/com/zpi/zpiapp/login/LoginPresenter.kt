@@ -94,7 +94,15 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
         if (id > 0) {
             User.userId = id
             User.userType = userType
-            mView.finishActivity()
+
+            if (userType == 1) {
+                // patient
+                mView.finishActivity()
+            }
+            if (userType == 2) {
+                // care assistant
+                mView.launchAssistantActivity()
+            }
         }
     }
 
@@ -117,12 +125,20 @@ class LoginPresenter(val mView: LoginContract.View) : LoginContract.Presenter {
                                     val id = body[0]
                                     val userType = body[1]
 
-                                    if (id > 0){
+                                    if (id > 0) {
                                         // successfully logged in
                                         User.userId = id
                                         User.userType = userType
                                         mView.storeLoginInPrefs(id, userType)
-                                        mView.finishActivity()
+
+                                        if (userType == 1) {
+                                            // patient
+                                            mView.finishActivity()
+                                        }
+                                        if (userType == 2) {
+                                            // care assistant
+                                            mView.launchAssistantActivity()
+                                        }
                                     } else {
                                         // login failed
                                         mView.showProgress(false)

@@ -2,6 +2,7 @@ package com.zpi.zpiapp.login
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
@@ -12,9 +13,11 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.zpi.zpiapp.R
+import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
+
 
 
     private lateinit var presenter: LoginContract.Presenter
@@ -235,5 +238,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val id = prefs.getInt(KEY_PREFS_ID, -1)
         val userType = prefs.getInt(KEY_PREFS_USER_TYPE, -1)
         presenter.setLoginLoadedFromPrefs(id, userType)
+    }
+
+    override fun launchAssistantActivity() {
+        val intent = Intent(this, CareAssistantsActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

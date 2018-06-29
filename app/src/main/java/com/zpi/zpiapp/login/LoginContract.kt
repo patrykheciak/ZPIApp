@@ -23,6 +23,8 @@ interface LoginContract {
 
         fun storeLoginInPrefs(id: Int, userType: Int)
         fun loadLoginFromPrefs()
+
+        fun launchAssistantActivity()
     }
 
     interface Presenter : BasePresenter {
