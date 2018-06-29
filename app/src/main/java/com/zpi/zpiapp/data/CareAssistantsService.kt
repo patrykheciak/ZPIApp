@@ -18,6 +18,10 @@ interface CareAssistantsService{
     fun addCareAssistant(@Path("userId") userId: Int,
                          @Path("login") careAssistantLogin: String):Call<ResponseBody>
 
+    @POST("$route/add2/{caId}/{login}")
+    fun addCharge(@Path("caId") userId: Int,
+                         @Path("login") patientLogin: String):Call<PatientDTO>
+
     @DELETE("$route/remove/{userId}/{caId}")
     fun removeCareAssistant(@Path("userId") userId: Int,
                             @Path("caId") careAssistantId:Int):Call<ResponseBody>

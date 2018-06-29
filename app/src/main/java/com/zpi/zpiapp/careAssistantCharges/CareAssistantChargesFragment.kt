@@ -67,7 +67,7 @@ class CareAssistantChargesFragment: Fragment(),CareAssistantChargesContract.Care
         care_assistant_charges_add_panel_fab.setOnClickListener{
             hideKeyboard()
             care_assistant_charges_add_panel_fab.isEnabled=false
-            val login = care_assistants_add_panel_login.text.toString();
+            val login = care_assistant_charges_add_panel_login.text.toString();
             mPresenter.addCharge(login)
             care_assistant_charges_add_panel_fab.isEnabled=true
         }
@@ -100,7 +100,7 @@ class CareAssistantChargesFragment: Fragment(),CareAssistantChargesContract.Care
 
 
     override fun showSnackBarError(error: String) {
-        Snackbar.make(care_assistants_root,error, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(care_assistant_charges_root,error, Snackbar.LENGTH_LONG).show();
     }
 
 

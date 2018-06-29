@@ -12,6 +12,30 @@ import retrofit2.Response
 class CareAssistantChargesPresenter(var mView: CareAssistantChargesContract.CareAssistantChargesVies?) : CareAssistantChargesContract.CareAssistantChargesPresenter {
 
 
+    override fun addCharge(login: String) {
+        RetrofitInstance.careAssistantsService
+                .addCharge(User.userId,login)
+                .enqueue(object :Callback<PatientDTO>{
+                    override fun onFailure(call: Call<PatientDTO>?, t: Throwable?) {
+                        mView?.showSnackBarError("Błąd połączenia")
+                    }
+
+                    override fun onResponse(call: Call<PatientDTO>?, response: Response<PatientDTO>?) {
+                        response?.let {
+                            if (it.isSuccessful)
+                                it.body()?.let {
+                                    mChargesList.add(it)
+                                    mView?.loadCharges(mChargesList)
+                                }
+                            else
+                                mView?.showSnackBarError(it.errorBody()?.string()?:"Nieznany błąd")
+                        }
+
+                    }
+
+                })
+    }
+
     val mChargesList = mutableListOf<PatientDTO>()
 
     init {
@@ -25,7 +49,7 @@ class CareAssistantChargesPresenter(var mView: CareAssistantChargesContract.Care
                 .getCharges(User.userId)
                 .enqueue(object : Callback<List<PatientDTO>> {
                     override fun onFailure(call: Call<List<PatientDTO>>?, t: Throwable?) {
-                        mView?.showSnackBarError("Brak połączenia")
+                        mView?.showConnectionError()
                         if (mView != null)
                             call?.clone()?.enqueue(this)
                     }
