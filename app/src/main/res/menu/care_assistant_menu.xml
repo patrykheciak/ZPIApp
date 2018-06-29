@@ -3,4 +3,9 @@
 
     <item android:id="@+id/assistant_item_my_patients"
           android:title="Moi pacjenci"/>
+    <item android:id="@+id/assistant_item_charges"
+        android:title="Podopieczni"/>
+    <item android:id="@+id/assistant_item_account"
+        android:title="Konto"/>
+
 </menu>

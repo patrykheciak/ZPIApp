@@ -107,8 +107,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,PhysiciansActivity::class.java))
         if(item?.itemId==R.id.accountMenuId)
             startActivity(Intent(this,EditPrivateDataActivity::class.java))
-        if (item?.itemId==R.id.chargesMenuId)
-            startActivity(Intent( this,CareAssistantChargesActivity::class.java ))
         return true
     }
 }

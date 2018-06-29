@@ -33,6 +33,13 @@ class CareAsstistantPerspectiveActivity : AppCompatActivity() {
         if (item?.itemId == R.id.assistant_item_my_patients) {
 
         }
+        if( item?.itemId == R.id.assistant_item_account ){
+            startActivity(Intent(this,EditPrivateDataActivity::class.java))
+        }
+
+        if (item?.itemId == R.id.assistant_item_charges){
+            startActivity(Intent( this,CareAssistantChargesActivity::class.java ))
+        }
         return true
     }
 }
