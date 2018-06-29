@@ -57,5 +57,8 @@
     <string name="CareAssistantMenuText">Opiekunowie</string>
     <string name="PhysiciansMenuText">Lekarze</string>
     <string name="AccountMenuText">Konto</string>
+    <string name="care_assistant_chargesNotFoundText">Nie znaleziono podopiecznych</string>
+    <string name="care_assistant_chargesConnectionProblemText">Problem z połączeniem</string>
+    <string name="newChatgesLoginEditTextHint">Login podopiecznego</string>
 
 </resources>
