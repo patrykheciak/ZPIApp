@@ -89,7 +89,7 @@ class CareAsstistantPerspectiveActivity : AppCompatActivity() {
             val array = patientListToArray(patientList)
 
             val spinnerArrayAdapter = ArrayAdapter<String>(
-                    baseContext, android.R.layout.simple_spinner_item, array)
+                    baseContext, android.R.layout.simple_spinner_dropdown_item, array)
             spinner.adapter = spinnerArrayAdapter
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
