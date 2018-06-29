@@ -4,15 +4,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.zpi.zpiapp.R
 import com.zpi.zpiapp.careAssistantCharges.CareAssistantChargesActivity
 import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
+import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
+import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
 import com.zpi.zpiapp.editPrivateData.EditPrivateDataActivity
+import com.zpi.zpiapp.model.PatientDTO
 import com.zpi.zpiapp.physicians.PhysiciansActivity
+import com.zpi.zpiapp.utlis.RetrofitInstance
+import com.zpi.zpiapp.utlis.User
 
 import kotlinx.android.synthetic.main.activity_care_asstistant_perspective.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CareAsstistantPerspectiveActivity : AppCompatActivity() {
 
@@ -20,6 +30,38 @@ class CareAsstistantPerspectiveActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_care_asstistant_perspective)
 
+        RetrofitInstance
+                .careAssistantsService
+                .getCharges(User.userId)
+                .enqueue(object : Callback<List<PatientDTO>>{
+                    override fun onFailure(call: Call<List<PatientDTO>>?, t: Throwable?) {
+
+                    }
+
+                    override fun onResponse(call: Call<List<PatientDTO>>?, response: Response<List<PatientDTO>>?) {
+                        Log.d("CareAsstistantPer", response?.body().toString())
+                        if (response != null) {
+                            if (response.isSuccessful) {
+                                val body = response.body()
+                                body?.let {
+//                                    it
+                                    if (it.isNotEmpty()) {
+                                        splash_no_patients.visibility = View.GONE
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                })
+
+        val fragment = DrugHistoryFragment()
+        val presenter = DrugHistoryPresenter(fragment)
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_history_container, fragment)
+                .commit()
 
     }
 
@@ -30,9 +72,7 @@ class CareAsstistantPerspectiveActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.assistant_item_my_patients) {
 
-        }
         if( item?.itemId == R.id.assistant_item_account ){
             startActivity(Intent(this,EditPrivateDataActivity::class.java))
         }
