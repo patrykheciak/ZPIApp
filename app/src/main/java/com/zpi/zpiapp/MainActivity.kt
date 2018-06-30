@@ -1,10 +1,12 @@
 package com.zpi.zpiapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.zpi.zpiapp.careAssistantCharges.CareAssistantChargesActivity
@@ -19,8 +21,11 @@ import com.zpi.zpiapp.editTodayDrugs.EditTodayDrugsPresenter
 import com.zpi.zpiapp.interactions.InteractionsFragment
 import com.zpi.zpiapp.interactions.InteractionsPresenter
 import com.zpi.zpiapp.login.LoginActivity
+import com.zpi.zpiapp.login.LoginActivity.Companion.KEY_PREFS_ID
+import com.zpi.zpiapp.login.LoginActivity.Companion.KEY_PREFS_USER_TYPE
 import com.zpi.zpiapp.physicians.PhysiciansActivity
 import com.zpi.zpiapp.utlis.User
+import com.zpi.zpiapp.utlis.User.userId
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -90,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         navigation.selectedItemId=R.id.navigation_home
 
+
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
@@ -107,6 +113,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,PhysiciansActivity::class.java))
         if(item?.itemId==R.id.accountMenuId)
             startActivity(Intent(this,EditPrivateDataActivity::class.java))
+        if(item?.itemId==R.id.logOutMenu){
+            getPreferences(Context.MODE_PRIVATE).edit()
+                    .putInt(KEY_PREFS_ID, -1)
+                    .putInt(KEY_PREFS_USER_TYPE, -1)
+                    .commit()
+            User.userId = -1
+
+            finish()
+        }
+
         return true
     }
 }

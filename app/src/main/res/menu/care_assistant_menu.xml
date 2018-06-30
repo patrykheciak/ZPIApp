@@ -3,7 +3,7 @@
 
     <item android:id="@+id/assistant_item_charges"
         android:title="Podopieczni"/>
-    <item android:id="@+id/assistant_item_account"
-        android:title="Konto"/>
+    <item android:id="@+id/assistant_item_account" android:title="Konto"/>
+    <item android:id="@+id/assistant_logOutMenu" android:title="Wyloguj"/>
 
 </menu>

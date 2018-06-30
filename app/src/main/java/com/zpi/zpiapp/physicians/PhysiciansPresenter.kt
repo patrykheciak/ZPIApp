@@ -90,7 +90,6 @@ class PhysiciansPresenter(private var physiciansView: PhysiciansContract.View?) 
                             }
                         }
                     })
-
         } else
             physiciansView?.showSnackBarError("Lekarz o numerze $pwzNumber jest już dodany")
 

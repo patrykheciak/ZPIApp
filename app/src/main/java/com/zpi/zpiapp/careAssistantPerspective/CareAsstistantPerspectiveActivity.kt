@@ -1,5 +1,6 @@
 package com.zpi.zpiapp.careAssistantPerspective
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -16,6 +17,7 @@ import com.zpi.zpiapp.careAssistants.CareAssistantsActivity
 import com.zpi.zpiapp.drugHistory.DrugHistoryFragment
 import com.zpi.zpiapp.drugHistory.DrugHistoryPresenter
 import com.zpi.zpiapp.editPrivateData.EditPrivateDataActivity
+import com.zpi.zpiapp.login.LoginActivity
 import com.zpi.zpiapp.model.PatientDTO
 import com.zpi.zpiapp.physicians.PhysiciansActivity
 import com.zpi.zpiapp.utlis.RetrofitInstance
@@ -128,6 +130,16 @@ class CareAsstistantPerspectiveActivity : AppCompatActivity() {
         if (item?.itemId == R.id.assistant_item_charges){
             startActivity(Intent( this,CareAssistantChargesActivity::class.java ))
         }
+        if(item?.itemId==R.id.assistant_logOutMenu){
+            getPreferences(Context.MODE_PRIVATE).edit()
+                    .putInt(LoginActivity.KEY_PREFS_ID, -1)
+                    .putInt(LoginActivity.KEY_PREFS_USER_TYPE, -1)
+                    .apply()
+            User.userId = -1
+            finish()
+
+        }
+
         return true
     }
 }
